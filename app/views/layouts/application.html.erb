@@ -1,14 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title>Toggl</title>
+  <meta><%= yield(:html_meta) %> </meta>
+  <title><%= yield(:html_title) %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+    <%= render 'layouts/menu/menu_wrapper' %>
+    <%= render 'layouts/breadcrumbs' unless current_page?(root_url) %>
 
-<%= yield %>
+    <div id="loading_div">
+      <img src="/assets/loading.gif">
+      <!--http://preloaders.net/ru/popular -->
+    </div>
+    <%= yield  %>
+
+    <%=raw MyConfig.get_config('metrika') %>
 
 </body>
 </html>

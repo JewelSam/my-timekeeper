@@ -1,0 +1,7 @@
+%div
+  - breadcrumbs.each do |item|
+    - if item[:link]
+      = link_to item[:title], item[:link]
+      \--->
+    - else
+      = item[:title]

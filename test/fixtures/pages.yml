@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  text: MyText
+  purpose: MyString
+  show_in_menu: false
+  menu: MyString
+  meta: MyText
+  title_of_window: MyString
+  ancestry: MyString
+  sort: 1
+
+two:
+  title: MyString
+  text: MyText
+  purpose: MyString
+  show_in_menu: false
+  menu: MyString
+  meta: MyText
+  title_of_window: MyString
+  ancestry: MyString
+  sort: 1

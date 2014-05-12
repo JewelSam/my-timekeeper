@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  key: MyString
+  key_ru: MyString
+  value: MyText
+
+two:
+  key: MyString
+  key_ru: MyString
+  value: MyText
