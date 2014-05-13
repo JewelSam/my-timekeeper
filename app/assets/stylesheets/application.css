@@ -8,9 +8,17 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require theme/bootstrap.min
+ *= require theme/font-awesome.min
+ *= require theme/animate.min
+ *= require theme/style
+ *= require theme/colors/color-default
+ *= require theme/width-boxed
  *= require lib/jquery-ui-1.10.3.custom.min
  *= require lib/jquery.fancybox-1.3.4
  *= require lib/validate
  *= require lib/loading
+ *= require lib/bootstrap-switch
+ *= require style
  *= require_self
  */

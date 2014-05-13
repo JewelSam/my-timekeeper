@@ -1,23 +1,44 @@
 <!doctype html>
 <html>
 <head>
-  <meta><%= yield(:html_meta) %> </meta>
   <title><%= yield(:html_title) %></title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+  <meta><%= yield(:html_meta) %> </meta>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <%= stylesheet_link_tag "application", media: "all" %>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/assets/theme/html5shiv.js"></script>
+  <script src="/assets/theme/respond.min.js"></script>
+  <![endif]-->
+
+  <%= javascript_include_tag "application" %>
+
+
 </head>
 <body>
-    <%= render 'layouts/menu/menu_wrapper' %>
-    <%= render 'layouts/breadcrumbs' unless current_page?(root_url) %>
 
-    <div id="loading_div">
-      <img src="/assets/loading.gif">
-      <!--http://preloaders.net/ru/popular -->
-    </div>
-    <%= yield  %>
+<%= render 'layouts/color_switcher' %>
 
-    <%=raw MyConfig.get_config('metrika') %>
+<div class='boxed animated fadeIn animation-delay-5'>
+
+  <%= render 'layouts/header' %>
+  <%= yield  %>
+  <%= render 'layouts/footer' %>
+
+</div>
+
+<div id='back-top'>
+  <a href='#navigation'></a>
+  <i class='fa fa-chevron-up'></i>
+</div>
+
+
+
+    <%#=raw MyConfig.get_config('metrika') %>
 
 </body>
 </html>

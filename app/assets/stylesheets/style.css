@@ -1,0 +1,28 @@
+.navbar-mind {
+    margin-bottom: 30px;
+}
+
+#footer {
+    /*border-top: solid 5px #00708c;*/
+}
+
+.no-margin-bottom { margin-bottom: 0; }
+.margin-bottom-10 { margin-bottom: 10px; }
+
+.margin-top-10 { margin-top: 10px; }
+.margin-top-20 { margin-top: 20px; }
+
+.box-bordered {
+    padding: 15px;
+    border: solid 1px #ddd;
+    overflow: hidden;
+}
+
+.caption-row {
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.bootstrap-switch {
+    margin-top: 3px;
+}

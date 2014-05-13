@@ -12,9 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require lib/jquery-ui-1.10.3.custom.min
-//= require lib/jquery.fancybox-1.3.4
+//= require theme/jquery-1.10.2.min
+//= require theme/jquery.cookie
+//= require theme/bootstrap.min
+//= require theme/jquery.mixitup.min
+//= require theme/holder
+//= require theme/app
+//= require theme/styleswitcher
 //= require lib/jquery.form.min
 //= require lib/jquery.validate.min
+//= require lib/bootstrap-switch
 //= require app

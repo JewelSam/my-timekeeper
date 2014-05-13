@@ -1,0 +1,21 @@
+%nav.navbar.navbar-static-top.navbar-mind#navigation{:role => "navigation"}
+  .container
+    .navbar-header
+      %a.navbar-brand.visible-xs{:href => "/"}
+        Open
+        %span Mind
+      %button.navbar-toggle{"data-target" => ".navbar-mind-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %i.fa.fa-bars.fa-inverse
+
+    .collapse.navbar-collapse.navbar-mind-collapse
+      %ul.nav.navbar-nav
+        %li.active= link_to 'Timer', '/'
+        %li= link_to 'Reports', '#'
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to '#' do
+            %span.glyphicon.glyphicon-cog
+        %li
+          = link_to '#' do
+            %span.glyphicon.glyphicon-log-out
