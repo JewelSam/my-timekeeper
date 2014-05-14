@@ -11,7 +11,8 @@ ru:
       photo_gallery: 'Фотогалерея'
       photo: 'Фотографии'
       feedback: 'Обратная связь'
-      category: 'Категории каталога'
+      category: 'Категории'
+      entry: 'Записи'
       product: 'Товары'
       portfolio_object: 'Портфолио'
       service: 'Услуги'
@@ -36,9 +37,19 @@ ru:
         text: 'Текст'
         created_at: "Создание"
         updated_at: "Обновление"
+      entry:
+        id: "№"
+        title: 'Название'
+        category: 'Категория'
+        start: 'Начало'
+        finish: 'Конец'
+        created_at: "Создание"
+        updated_at: "Обновление"
       category:
         id: "№"
         title: 'Название'
+        user: 'Пользователь'
+        entries: 'Записи'
         meta: 'Мета теги'
         title_of_window: 'Заголовок окна'
         products: 'Товары'

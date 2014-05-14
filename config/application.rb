@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-module Toggl
+module MyTimekeeper
   class Application < Rails::Application
     config.exceptions_app = self.routes
     config.action_controller.include_all_helpers = false

@@ -7,15 +7,14 @@ if($.cookie("width")) {
 }
 
 $(document).ready(function() { 
-    $("#color-switcher-content .color").click(function() { 
-        $("link[href|='css/color']").attr("href", "css/" + $(this).attr('rel'));
+    $("#color-switcher-content .color").click(function() {
+        $("link[href*='colors/color']").attr("href", $(this).attr('rel'));
         $.cookie("color",$(this).attr('rel'), {expires: 7, path: '/'});
         return false;
     });
 
     $("#color-switcher-content .option").click(function() { 
-        $("link[href|='css/width']").attr("href", "css/" + $(this).attr('rel'));
-        console.log('test');
+        $("link[href*='theme/width']").attr("href", $(this).attr('rel'));
         $.cookie("width",$(this).attr('rel'), {expires: 7, path: '/'});
         return false;
     });

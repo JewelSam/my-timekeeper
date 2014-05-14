@@ -1,21 +1,52 @@
+/* common use */
+.no-margin-bottom { margin-bottom: 0; }
+.margin-bottom-10 { margin-bottom: 10px; }
+
+.no-margin-top { margin-top: 0; }
+.margin-top-10 { margin-top: 10px; }
+.margin-top-20 { margin-top: 20px; }
+
+.margin-left-20 { margin-left: 20px; }
+
+.label.label-info.my-colors { background-color: #6c008f; }
+.label.label-success.my-colors { background-color: #097900; }
+.label.label-warning.my-colors { background-color: #de8d01; }
+.label.label-danger.my-colors { background-color: #a50000; }
+
+button.btn-primary.my-colors {
+    background-color: #00708c;
+    border-color: #004759;
+}
+button.btn-info.my-colors {
+    background-color: #6c008f;
+    border-color: #560072;
+}
+button.btn-success.my-colors {
+    background-color: #097900;
+    border-color: #075e00;
+}
+button.btn-warning.my-colors {
+    background-color: #de8d01;
+    border-color: #be7901;
+}
+button.btn-danger.my-colors {
+    background-color: #a50000;
+    border-color: #820000;
+}
+
+
+/* main page */
 .navbar-mind {
     margin-bottom: 30px;
 }
 
-#footer {
-    /*border-top: solid 5px #00708c;*/
+.current_entry button.btn-default {
+    border-left: 0;
+    border-right: 0;
 }
 
-.no-margin-bottom { margin-bottom: 0; }
-.margin-bottom-10 { margin-bottom: 10px; }
-
-.margin-top-10 { margin-top: 10px; }
-.margin-top-20 { margin-top: 20px; }
-
-.box-bordered {
-    padding: 15px;
-    border: solid 1px #ddd;
-    overflow: hidden;
+.current_entry button.btn-default:focus, .current_entry button.btn-default:active, .current_entry button.btn-default:hover {
+    background-color: #ffffff;
 }
 
 .caption-row {
@@ -25,4 +56,36 @@
 
 .bootstrap-switch {
     margin-top: 3px;
+}
+
+.popular_things a {
+    padding-left: 10px;
+}
+
+.popular_things a:first-child {
+    padding-left: 0;
+}
+
+/* list of entries */
+
+.list_of_entries table tr td:last-child,
+.list_of_entries table tr th:first-child,
+.list_of_entries table tr td:first-child,
+.list_of_entries table tr td:nth-last-child(2) {
+    width: 1%;
+    white-space:nowrap;
+}
+
+table tr td.my-help-block{
+    color: #737373;
+    font-size: 75%;
+}
+
+.list_of_entries table tr td:nth-last-child(2) {
+    padding-right: 50px;
+    /*font-size: 120%;*/
+}
+
+.list_of_entries table .label {
+    margin-left: 15px;
 }

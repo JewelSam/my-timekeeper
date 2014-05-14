@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Toggl::Application.load_tasks
+MyTimekeeper::Application.load_tasks

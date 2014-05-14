@@ -4,10 +4,11 @@
   .row
     .col-md-12
 
-      .input-group.input-group-lg
+      .input-group.input-group-lg.current_entry
         %input.form-control{type: "text", placeholder: 'What are you working on?'}
         %span.input-group-btn
           %button.btn.btn-default{:type => "button"} Category...
+          %button.btn.btn-default{:type => "button"} 13:50 min
           %button.btn.btn-success{:type => "button"} Start
       / /input-group
 
@@ -15,27 +16,39 @@
         %h3.margin-bottom-10 Add manually
         .panel.panel-default
           .panel-body
-            .row.caption-row
-              .col-md-2.pull-right Replace
+            .row.caption-row.hidden-xs
+              .col-md-4.col-md-offset-8
+                .col-md-4 Start
+                .col-md-4 Finish/duration
+                .col-md-4 Replace
             .row
-              .col-md-10
+              .col-md-8
                 .input-group
                   %input.form-control{type: "text", placeholder: 'Stuff you forgot'}
                   %span.input-group-btn
                     %button.btn.btn-default{:type => "button"} Category...
                     %button.btn.btn-success{:type => "button"} Add
-              .col-md-2
-                %input{type: "checkbox", name: 'replace'}
+              .col-md-4
+                .col-md-4
+                  %input.form-control{type: 'text', value: '00:00', placeholder: 'Start'}
+                .col-md-4
+                  %input.form-control{type: 'text', value: '15', placeholder: 'Finish/duration'}
+                .col-md-4
+                  %input{type: "checkbox", name: 'replace', checked: true}
+              -#.col-md-1
+                %input.form-control{type: 'text', value: '15'}
+              -#.col-md-2
+                %input{type: "checkbox", name: 'replace', checked: true}
             .row.margin-top-10
-              .col-md-12
-                %span.label.label-default Обед
-                %span.label.label-default Сплю
-                %span.label.label-default Готовлю ужин
-                %span.label.label-default с костей
-                %span.label.label-default Завтрак
-                %span.label.label-default Утренние дела
-                %span.label.label-default Массаж
-                %span.label.label-default План меню
+              .col-md-12.popular_things
+                %a{href: true, style: 'font-size: 120%;'} Обед
+                %a{href: true} Сплю
+                %a{href: true} Готовлю ужин
+                %a{href: true, style: 'font-size: 110%;'} С костей
+                %a{href: true} Завтрак
+                %a{href: true, style: 'font-size: 130%;'} Утренние дела
+                %a{href: true} Массаж
+                %a{href: true, style: 'font-size: 90%;'} План меню
             -#.row.margin-top-10
               .col-md-12
                 %span.label.label-default 5 min
@@ -45,69 +58,91 @@
                 %span.label.label-warning 30 min
                 %span.label.label-danger 1 hour
 
-      %article.component-element.margin-top-20
+      %article.component-element.margin-top-20.list_of_entries
         .row
           .col-md-12
-            %table.table.table-striped
+            %table.table.table-hover
               %thead
                 %tr
                   %th
                     %input{type: 'checkbox'}
                     %span.caret
-                  %th Thing
+                  %th Today
                   %th Time
-                  %th From-To
+                  %th
               %tbody
                 %tr
                   %td
                     %input{type: 'checkbox'}
-                  %td Ужин
+                  %td
+                    Ужин
+                    %span.label.label-warning.my-colors Еда
                   %td 35min
-                  %td 15:40-16:45
+                  %td.my-help-block 15:40-16:45
                 %tr
                   %td
                     %input{type: 'checkbox'}
                   %td Разговариваю с Костей
                   %td 2h
-                  %td 16:00-18:00
+                  %td.my-help-block 16:00-18:00
+                %tr
+                  %td
+                    %input{type: 'checkbox'}
+                  %td
+                    Прогулка
+                    %span.label.label-danger.my-colors Полезные занятия
+                  %td 2h 30min
+                  %td.my-help-block 19:00-21:30
                 %tr
                   %td
                     %input{type: 'checkbox'}
                   %td Прогулка
                   %td 2h 30min
-                  %td 19:00-21:30
+                  %td.my-help-block 19:00-21:30
                 %tr
                   %td
                     %input{type: 'checkbox'}
                   %td Прогулка
                   %td 2h 30min
-                  %td 19:00-21:30
+                  %td.my-help-block 19:00-21:30
                 %tr
                   %td
                     %input{type: 'checkbox'}
                   %td Прогулка
                   %td 2h 30min
-                  %td 19:00-21:30
-                %tr
-                  %td
-                    %input{type: 'checkbox'}
-                  %td Прогулка
-                  %td 2h 30min
-                  %td 19:00-21:30
+                  %td.my-help-block 19:00-21:30
         .row
           .col-md-12= link_to 'Show more', '#'
-
-
   / col
+  -#.row
+    .col-md-12
+      %h3.margin-bottom-10.margin-left-20 Today report
+      .panel.panel-default
+        .panel-body
+          .row
+            .col-md-12
+              %button.btn.btn-success.my-colors{style: 'width: 49%;'} Работа 6h
+              %button.btn.btn-danger.my-colors{style: 'width: 20%;'} Еда 2h 30min
+              %button.btn.btn-info.my-colors{style: 'width: 30%;'} Сплю 9h
 / container
 
 .row
   .col-md-12
-    .panel.panel-primary.no-margin-bottom
-      .panel-heading Today report
+    %h3.margin-bottom-20.margin-left-20
+      Report today
+      -#%span.label.label-primary.label-xs Today
+      -#%span.label.label-default.label-xs Week
+      -#%span.label.label-default.label-xs Month
+    -#.row
+      .col-md-2
+        %h3.margin-bottom-20.margin-left-20.no-margin-top Report:
+      .col-md-2
+        %select.form-control
+          %option today
+    .panel.panel-default.no-margin-bottom
       .panel-body
         .row
           .col-md-12
-            %button.btn.btn-default{style: 'width: 45%;'} Работа 6h
-            %button.btn.btn-default{style: 'width: 20%;'} Еда 2h 30min
-            %button.btn.btn-default{style: 'width: 30%;'} Сплю 9h
+            %button.btn.btn-success.my-colors{style: 'width: 49%;'} Работа 6h
+            %button.btn.btn-danger.my-colors{style: 'width: 20%;'} Еда 2h 30min
+            %button.btn.btn-info.my-colors{style: 'width: 30%;'} Сплю 9h

@@ -1,17 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  user_id: 1
+  title: MyText
 
 two:
-  name: MyString
+  user_id: 1
+  title: MyText
 
 # == Schema Information
 #
-# Table name: roles
+# Table name: categories
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  user_id    :integer
+#  title      :text
 #  created_at :datetime
 #  updated_at :datetime
 #

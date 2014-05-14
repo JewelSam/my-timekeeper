@@ -2,13 +2,16 @@
   .container
     .navbar-header
       %a.navbar-brand.visible-xs{:href => "/"}
-        Open
-        %span Mind
+        My
+        %span Timekeeper
       %button.navbar-toggle{"data-target" => ".navbar-mind-collapse", "data-toggle" => "collapse", :type => "button"}
         %span.sr-only Toggle navigation
         %i.fa.fa-bars.fa-inverse
 
     .collapse.navbar-collapse.navbar-mind-collapse
+      %a.navbar-brand.hidden-xs{:href => "/"}
+        My
+        %span Timekeeper
       %ul.nav.navbar-nav
         %li.active= link_to 'Timer', '/'
         %li= link_to 'Reports', '#'

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512150119) do
+ActiveRecord::Schema.define(version: 20140513123209) do
+
+  create_table "categories", force: true do |t|
+    t.integer  "user_id"
+    t.text     "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ckeditor_assets", force: true do |t|
     t.string   "data_file_name",               null: false
@@ -28,6 +35,15 @@ ActiveRecord::Schema.define(version: 20140512150119) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "entries", force: true do |t|
+    t.integer  "category_id"
+    t.text     "title"
+    t.datetime "start"
+    t.datetime "finish"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "my_configs", force: true do |t|
     t.string   "key"
