@@ -1,4 +1,5 @@
 MyTimekeeper::Application.routes.draw do
+  get "entries/index"
   get '/pages/:id-:alias' => 'pages#show', as: 'page'
   root 'pages#home'
   get '/500' => 'errors#server_error'

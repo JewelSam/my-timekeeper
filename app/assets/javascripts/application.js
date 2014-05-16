@@ -19,7 +19,13 @@
 //= require theme/holder
 //= require theme/app
 //= require theme/styleswitcher
+//= require angular/lib/angular.min
+//= require angular/lib/angular-route.min
+//= require angular/lib/angular-sanitize.min
 //= require lib/jquery.form.min
 //= require lib/jquery.validate.min
 //= require lib/bootstrap-switch
+//= require angular/routes
+//= require angular/directives
+//= require angular/entries_controller
 //= require app

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
   belongs_to :role
+  has_many :categories
 
   def role?(name)
     role and role.name == name
