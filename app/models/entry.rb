@@ -4,6 +4,9 @@ class Entry < ActiveRecord::Base
   validates :start, presence: true
 
   default_scope {order('start DESC')}
+
+  def start_to_i; start.to_i end
+  def finish_to_i; finish.to_i end
 end
 
 # == Schema Information

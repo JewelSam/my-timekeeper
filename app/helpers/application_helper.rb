@@ -41,4 +41,8 @@ module ApplicationHelper
     full_path += "order=#{param}&direction=#{direction}"
   end
 
+  def to_hash(array)
+    Hash[*array.map{|el| [el['id'], el]}.flatten]
+  end
+
 end

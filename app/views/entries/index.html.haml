@@ -32,7 +32,7 @@
                 .col-md-4
                   %input.form-control{type: 'text', value: '15', placeholder: 'Finish/duration'}
                 .col-md-4
-                  %input{type: "checkbox", name: 'replace', checked: true}
+                  %input{type: "checkbox", checked: true, 'tablet-style' => true}
               -#.col-md-1
                 %input.form-control{type: 'text', value: '15'}
               -#.col-md-2
@@ -74,9 +74,9 @@
                     %input{type: 'checkbox'}
                   %td
                     {{entry.title}}
-                    %span.label.label-warning.my-colors {{entry.category_id}}
-                  %td 35min
-                  %td.my-help-block 15:40-16:45
+                    %span.label.label-warning.my-colors {{categories[entry.category_id].title}}
+                  %td {{duration(entry)}}
+                  %td.my-help-block {{entry.start_to_i.to_time()}}-{{entry.finish_to_i.to_time()}}
 
         .row
           .col-md-12= link_to 'Show more', '#'

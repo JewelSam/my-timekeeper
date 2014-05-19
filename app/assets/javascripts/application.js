@@ -25,6 +25,7 @@
 //= require lib/jquery.form.min
 //= require lib/jquery.validate.min
 //= require lib/bootstrap-switch
+//= require lib/to_time
 //= require angular/routes
 //= require angular/directives
 //= require angular/entries_controller
