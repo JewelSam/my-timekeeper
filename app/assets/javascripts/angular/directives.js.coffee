@@ -2,7 +2,16 @@ App.directive('tabletStyle', -> (scope, element, attrs) -> $(element).bootstrapS
 App.directive('datepicker', -> (scope, element, attrs) -> $(element).datepicker())
 App.directive('showFormEditTime', -> (scope, element, attrs) ->
   $(element).on('click', (e) ->
-    $('#form_edit_time').css('position','fixed').css('left',e.clientX-300).css('top',e.clientY+10).css('display','block')
-#    $('html').on('click', -> $('#form_edit_time').css('display','none') )
+    position = $(this).offset();
+    $('#form_edit_time').css('position','absolute').css('left',position.left + $(this).outerWidth( true ) - 295).css('top',position.top +  $(this).outerHeight(true)).css('display','block')
+    $('#form_edit_time').click((event) ->
+      event.stopPropagation();
+    )
+    $('html').click((e) ->
+      $('#form_edit_time').css('display','none');
+    )
+    e.stopPropagation();
+
   )
+
 )
