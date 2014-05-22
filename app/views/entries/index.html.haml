@@ -107,9 +107,9 @@
     .col-md-6 Finish
   .row
     .col-md-6
-      %input.form-control{type: 'text', placeholder: 'Start', 'ng-model' => 'edit_entry.start'}
+      %input.form-control{type: 'text', placeholder: 'Start', 'ng-model' => 'edit_entry.start_to_s'}
     .col-md-6
-      %input.form-control{type: 'text', placeholder: 'Finish', 'ng-model' => 'edit_entry.finish', 'ng-disabled' => 'edit_entry.current'}
+      %input.form-control{type: 'text', placeholder: 'Finish', 'ng-model' => 'edit_entry.finish_to_s', 'ng-disabled' => 'edit_entry.current'}
   .row
     .col-md-12
       %input.hidden{type: 'text'}
