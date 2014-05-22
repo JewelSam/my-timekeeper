@@ -9,6 +9,13 @@ Number.prototype.toHHMM = function() {
 
 };
 
+Date.prototype.toHHMM = function(){
+    var h = this.getHours();
+    var m = this.getMinutes();
+    var res = (h < 10 ? ('0' + h) : h) + ':' + (m < 10 ? ('0' + m) : m);
+    return res;
+};
+
 Number.prototype.hours_minutes_secs = function(){
     var all_secs = Math.round(this/1000);
 
@@ -56,4 +63,5 @@ String.prototype.fromHHMM = function(){
     var m = time[1];
 
     return new Date(yyyy,mm,dd,h,m,0);
-}
+};
+

@@ -10,12 +10,17 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     $scope.categories_order = data['categories_order']
     $scope.entries = data['entries']
 
-    $scope.update_current_entry()
+    $scope.update_entries()
     $rootScope.loading = false
   ).error( -> show_error() )
 
+  $scope.update_entries = ->
+    $scope.current_entry = (entry for entry in $scope.entries when entry.current)[0] || {title: ''}
+    for entry in $scope.entries
+      entry.start = new Date(entry.start_to_i * 1000)
+      entry.finish = if entry.finish_to_i then new Date(entry.finish_to_i * 1000) else null
+
 #  CURRENT ENTRY ###############################################################################
-  $scope.update_current_entry = -> $scope.current_entry = (entry for entry in $scope.entries when entry.current)[0] || {title: ''}
   $interval(
     -> if $scope.current_entry.current then $scope.current_entry.finish = new Date()
   , 1000)
@@ -23,7 +28,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.saveEntry = (entry) ->
     $http({method: 'POST', url: "/entries/update", data: entry}).success((data) ->
       $scope.entries = data['entries']
-      $scope.update_current_entry()
+      $scope.update_entries()
     ).error((data) -> show_error(data['errors']))
 
   $scope.createEntry = ->
@@ -38,12 +43,12 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.edit_entry = {}
   $scope.showFormEditTime = (entry) ->
     $scope.edit_entry = entry
-    $scope.edit_entry.start_to_s = if entry.start_to_i then entry.start_to_i.toHHMM() else ''
-    $scope.edit_entry.finish_to_s = if entry.finish_to_i then entry.finish_to_i.toHHMM() else ''
+    $scope.edit_entry.start_to_s = entry.start.toHHMM()
+    $scope.edit_entry.finish_to_s = entry.finish.toHHMM() unless entry.current
 
   $scope.saveEditedTime =  ->
     $scope.edit_entry.start = $scope.edit_entry.start_to_s.fromHHMM()
-    $scope.edit_entry.finish = $scope.edit_entry.finish_to_s.fromHHMM()
+    $scope.edit_entry.finish = if $scope.edit_entry.current then null else $scope.edit_entry.finish_to_s.fromHHMM()
     $scope.saveEntry($scope.edit_entry)
 
   #  MANUALLY ADD ENTRY ###############################################################################
@@ -60,16 +65,8 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     entry.checked = !state for entry in $scope.entries
 
   $scope.duration = (entry) ->
-    finish =
-      if entry.current then new Date()
-      else if entry.finish and entry.finish.constructor.name == 'Date' then entry.finish
-      else if entry.finish then new Date(entry.finish_to_i * 1000)
-      else 0
-
-    start =
-      if entry.start and entry.start.constructor.name == 'Date' then entry.start
-      else if entry.start then new Date(entry.start_to_i * 1000)
-      else 0
+    finish = entry.finish || (if entry.current then new Date() else 0)
+    start = entry.start || 0
 
     (finish-start).toHHMMSS()
 
@@ -84,6 +81,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
     $http({method: 'POST', url: "/entries/destroy", data: {ids: ids}}).success((data) ->
       $scope.entries = data['entries']
+      $scope.update_entries()
     ).error((data) -> show_error(data['errors']))
 
 ])
