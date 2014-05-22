@@ -1,66 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f65b429c-8701-4844-9cff-2aea5c67cc1e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/my-timekeeper.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/blank.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_loading.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_nav_left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_nav_right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_shadow_e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_shadow_n.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_shadow_ne.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_shadow_nw.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_shadow_s.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_shadow_se.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_shadow_sw.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_shadow_w.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_title_left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_title_main.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_title_over.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancy_title_right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancybox-x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancybox-y.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/fancybox/fancybox.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/next.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/images/prev.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/javascripts/entries.js.coffee" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/stylesheets/entries.css.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/stylesheets/lib/jquery-ui-1.10.3.custom.min.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_flat_0_aaaaaa_40x100.png" afterPath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_flat_0_aaaaaa_40x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_flat_75_ffffff_40x100.png" afterPath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_flat_75_ffffff_40x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_55_fbf9ee_1x400.png" afterPath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_55_fbf9ee_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_65_ffffff_1x400.png" afterPath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_75_dadada_1x400.png" afterPath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_75_dadada_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_75_e6e6e6_1x400.png" afterPath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_75_e6e6e6_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_95_fef1ec_1x400.png" afterPath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_glass_95_fef1ec_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_highlight-soft_75_cccccc_1x100.png" afterPath="$PROJECT_DIR$/app/assets/images/ui/ui-bg_highlight-soft_75_cccccc_1x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_header.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/_header.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ability.rb" afterPath="$PROJECT_DIR$/app/models/ability.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/app.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/app.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/angular/directives.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/angular/directives.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/angular/entries_controller.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/angular/entries_controller.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/entries_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/entries_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/entry.rb" afterPath="$PROJECT_DIR$/app/models/entry.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/entries/index.html.haml" afterPath="$PROJECT_DIR$/app/views/entries/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/pages/main.html.haml" afterPath="$PROJECT_DIR$/app/views/pages/main.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/pages_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/pages_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/style.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/theme/style.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/theme/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/lib/to_time.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/lib/to_time.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="f65b429c-8701-4844-9cff-2aea5c67cc1e" name="Default" comment="" />
     <ignored path="my_timekeeper.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="f65b429c-8701-4844-9cff-2aea5c67cc1e" time="1400732445338" ignored="false" />
@@ -135,7 +76,7 @@
       <file leaf-file-name="to_time.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/lib/to_time.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="40" selection-start="1131" selection-end="1267" vertical-scroll-proportion="0.8956885">
+            <state line="54" column="42" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.8956885">
               <folding />
             </state>
           </provider>
@@ -912,7 +853,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/lib/to_time.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="40" selection-start="1131" selection-end="1267" vertical-scroll-proportion="0.8956885">
+        <state line="54" column="42" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.8956885">
           <folding />
         </state>
       </provider>
