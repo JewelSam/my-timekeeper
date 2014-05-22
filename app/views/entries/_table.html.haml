@@ -6,16 +6,23 @@
           %tr
             %th
               %input{type: 'checkbox', 'ng-checked' => 'allChecked()', 'ng-click' => 'allCheck()'}
-              %span.glyphicon.glyphicon-remove.font-light-gray{'ng-click' => 'destroyEntry()'}
+              &nbsp;
+              %i.fa.fa-trash-o.button-delete{'ng-click' => 'destroyEntry()'}
             %th Today
             %th Time
             %th
         %tbody
           %tr{'ng-repeat' => 'entry in entries'}
             %td
+              -#%div{:style=>'margin-top: 6px; display:inline'}
               %input{type: 'checkbox', 'ng-model' => 'entry.checked'}
-              %span.glyphicon.glyphicon-play.font-light-gray{'ng-click' => 'setCurrentEntry(entry)'}
-              %span.glyphicon.glyphicon-remove.font-light-gray{'ng-click' => 'destroyEntry(entry)'}
+                -#%button.btn.btn-sm.btn-default
+              &nbsp;
+              %i.fa.fa-play.button-play{ 'ng-click' => 'setCurrentEntry(entry)'}
+              &nbsp;
+              %i.fa.fa-trash-o.button-delete{ 'ng-click' => 'destroyEntry(entry)'}
+              -#%span.glyphicon.glyphicon-play.font-light-gray{'ng-click' => 'setCurrentEntry(entry)'}
+              -#%span.glyphicon.glyphicon-remove.font-light-gray{'ng-click' => 'destroyEntry(entry)'}
             %td
               {{entry.title}}
               %span.label.label-warning.my-colors

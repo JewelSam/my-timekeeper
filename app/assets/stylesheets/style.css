@@ -8,6 +8,30 @@
 
 .margin-left-20 { margin-left: 20px; }
 
+table input[type="checkbox"]{
+    position:relative;
+    top:2px;
+}
+
+i.button-play{
+    color: #097900;
+    cursor: pointer;
+}
+
+i.button-play:hover{
+    color: #075e00;
+
+
+}
+
+i.button-delete{
+    cursor: pointer;
+}
+i.button-delete:hover{
+    color: #000000;
+}
+
+
 .label.label-info.my-colors { background-color: #6c008f; }
 .label.label-success.my-colors { background-color: #097900; }
 .label.label-warning.my-colors { background-color: #de8d01; }
