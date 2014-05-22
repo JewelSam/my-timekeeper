@@ -40,6 +40,11 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     $scope.current_entry.current = false
     $scope.saveEntry($scope.current_entry)
 
+  $scope.saveCurrentEntry = ->
+    if $scope.current_entry.current
+      $scope.current_entry.finish = null
+      $scope.saveEntry($scope.current_entry)
+
   $scope.edit_entry = {}
   $scope.showFormEditTime = (entry) ->
     $scope.edit_entry = entry
