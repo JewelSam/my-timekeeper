@@ -49,12 +49,14 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.showFormEditTime = (entry) ->
     $scope.edit_entry = entry
     $scope.edit_entry.start_to_s = if entry.start then entry.start.toHHMM() else ''
+    $( "#form_edit_time [datepicker]" ).datepicker( "setDate", entry.start || new Date() );
     unless entry.current
       $scope.edit_entry.finish_to_s = if entry.finish then entry.finish.toHHMM() else ''
 
   $scope.saveEditedTime =  ->
-    $scope.edit_entry.start = $scope.edit_entry.start_to_s.fromHHMM()
-    $scope.edit_entry.finish = $scope.edit_entry.finish_to_s.fromHHMM() unless $scope.edit_entry.current
+    date = $( "#form_edit_time [datepicker]" ).datepicker( "getDate" )
+    $scope.edit_entry.start = $scope.edit_entry.start_to_s.fromHHMM(date)
+    $scope.edit_entry.finish = $scope.edit_entry.finish_to_s.fromHHMM(date) unless $scope.edit_entry.current
     $('#form_edit_time').css('display','none')
     $scope.saveEntry($scope.edit_entry)
 

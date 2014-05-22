@@ -6,13 +6,23 @@ Number.prototype.toHHMM = function() {
         if (js_date.getMinutes() < 10) res += '0';
         return (res + js_date.getMinutes());
     }
-
 };
 
 Date.prototype.toHHMM = function(){
     var h = this.getHours();
     var m = this.getMinutes();
     var res = (h < 10 ? ('0' + h) : h) + ':' + (m < 10 ? ('0' + m) : m);
+    return res;
+};
+
+Date.prototype.toMMDDYYYY = function(){
+    var yyyy = this.getFullYear();
+    var mm = this.getMonth();
+    var dd = this.getDate();
+    console.log(yyyy);
+    console.log(mm);
+    console.log(dd);
+    var res = (mm < 10 ? ('0' + mm) : mm) + '/' + (dd < 10 ? ('0' + dd) : dd) + '/' + yyyy;
     return res;
 };
 
@@ -52,16 +62,22 @@ Number.prototype.toHHMMSS = function() {
 
 };
 
-String.prototype.fromHHMM = function(){
-    var today = new Date();
-    var yyyy = today.getFullYear();
-    var mm = today.getMonth();
-    var dd = today.getDate();
+String.prototype.fromHHMM = function(date){
+    var yyyy = date.getFullYear();
+    var mm = date.getMonth();
+    var dd = date.getDate();
 
     var time = this.split(":");
     var h = time[0];
     var m = time[1];
 
     return new Date(yyyy,mm,dd,h,m,0);
+};
+
+String.prototype.fromYYMMDD = function(){
+    var yy = this.split('/')[0];
+    var mm = this.split('/')[1];
+    var dd = this.split('/')[2];
+    return new Date(yy,mm,dd,0,0,0);
 };
 
