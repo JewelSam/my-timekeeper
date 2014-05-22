@@ -26,7 +26,10 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   , 1000)
 
   $scope.saveEntry = (entry) ->
-    $http({method: 'POST', url: "/entries/update", data: entry}).success((data) ->
+    data = angular.copy(entry)
+    data.finish = null if entry.current
+
+    $http({method: 'POST', url: "/entries/update", data: data}).success((data) ->
       $scope.entries = data['entries']
       $scope.update_entries()
     ).error((data) -> show_error(data['errors']))
@@ -40,24 +43,27 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     $scope.current_entry.current = false
     $scope.saveEntry($scope.current_entry)
 
-  $scope.saveCurrentEntry = ->
-    if $scope.current_entry.current
-      $scope.current_entry.finish = null
-      $scope.saveEntry($scope.current_entry)
+  $scope.saveCurrentEntry = -> $scope.saveEntry($scope.current_entry) if $scope.current_entry.current
 
   $scope.edit_entry = {}
   $scope.showFormEditTime = (entry) ->
     $scope.edit_entry = entry
-    $scope.edit_entry.start_to_s = entry.start.toHHMM()
-    $scope.edit_entry.finish_to_s = entry.finish.toHHMM() unless entry.current
+    $scope.edit_entry.start_to_s = if entry.start then entry.start.toHHMM() else ''
+    unless entry.current
+      $scope.edit_entry.finish_to_s = if entry.finish then entry.finish.toHHMM() else ''
 
   $scope.saveEditedTime =  ->
     $scope.edit_entry.start = $scope.edit_entry.start_to_s.fromHHMM()
-    $scope.edit_entry.finish = if $scope.edit_entry.current then null else $scope.edit_entry.finish_to_s.fromHHMM()
+    $scope.edit_entry.finish = $scope.edit_entry.finish_to_s.fromHHMM() unless $scope.edit_entry.current
+    $('#form_edit_time').css('display','none')
     $scope.saveEntry($scope.edit_entry)
 
   #  MANUALLY ADD ENTRY ###############################################################################
-  $scope.manually_entry = {title: ''}
+  $scope.manually_entry = {title: '', start_to_s: new Date().toHHMM(), finish_to_s: new Date().toHHMM()}
+  $scope.saveManuallyEntry = ->
+    $scope.manually_entry.start = $scope.manually_entry.start_to_s.fromHHMM()
+    $scope.manually_entry.finish = $scope.manually_entry.finish_to_s.fromHHMM()
+    $scope.saveEntry($scope.manually_entry)
 
 #  TABLE ENTRIES ###############################################################################
   $scope.checked = -> (entry for entry in $scope.entries when entry.checked)
