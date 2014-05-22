@@ -13,7 +13,7 @@
             .input-group
               %input.form-control{type: "text", placeholder: 'Stuff you forgot', 'ng-model' => 'manually_entry.title'}
               %span.input-group-btn
-                %select.btn.btn-default.form-control{'ng-model' => 'manually_entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order"}
+                %select.btn.btn-default{'ng-model' => 'manually_entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order"}
                   %option{value: ''} Category...
                 %button.btn.btn-success{:type => "button", 'ng-click' => 'saveManuallyEntry()'} Add
           .col-md-4
