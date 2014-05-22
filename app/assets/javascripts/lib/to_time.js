@@ -45,12 +45,15 @@ Number.prototype.toHHMMSS = function() {
 
 };
 
-String.prototype.fromHHMM = function(HHMM){
-//    var yyyyy
-//
-//    var time = HHMM.split(":");
-//    var h = time[0];
-//    var m = time[1];
-//
-//    return new Date(yyyy,mm,dd,h,m,s);
+String.prototype.fromHHMM = function(){
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = today.getMonth();
+    var dd = today.getDate();
+
+    var time = this.split(":");
+    var h = time[0];
+    var m = time[1];
+
+    return new Date(yyyy,mm,dd,h,m,0);
 }

@@ -42,8 +42,9 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     $scope.edit_entry.finish_to_s = if entry.finish_to_i then entry.finish_to_i.toHHMM() else ''
 
   $scope.saveEditedTime =  ->
-    $scope.edit_entry.start = $scope.edit_entry.start_to_s.split(':')
-
+    $scope.edit_entry.start = $scope.edit_entry.start_to_s.fromHHMM()
+    $scope.edit_entry.finish = $scope.edit_entry.finish_to_s.fromHHMM()
+    $scope.saveEntry($scope.edit_entry)
 
   #  MANUALLY ADD ENTRY ###############################################################################
   $scope.manually_entry = {title: ''}
