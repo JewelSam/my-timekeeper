@@ -3,26 +3,28 @@
   .panel.panel-default
     .panel-body
       .row.caption-row.hidden-xs
-        .col-md-4.col-md-offset-8
-          .col-md-4 Start
-          .col-md-4 Finish/duration
-          .col-md-4 Replace
+        .col-md-4.col-sm-6.col-md-offset-8.col-sm-offset-6
+          .row
+            .col-md-4.col-sm-4 Start
+            .col-md-4.col-sm-4{:style=>'overflow:hidden;'} Finish/duration
+            .col-md-4.col-sm-4 Replace
       .row
         %form{'ng-submit' => 'saveManuallyEntry()', name: 'manuallyEntry'}
-          .col-md-8
-            .input-group
+          .col-md-8.col-sm-6
+            .input-group.input-group-sm.input-group-mf.current_entry
               %input.form-control{type: "text", placeholder: 'Stuff you forgot', 'ng-model' => 'manually_entry.title'}
               %span.input-group-btn
-                %select.btn.btn-default.form-control{'ng-model' => 'manually_entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order"}
+                %select.btn.btn-default{'ng-model' => 'manually_entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order"}
                   %option{value: ''} Category...
                 %button.btn.btn-success{:type => "button", 'ng-click' => 'saveManuallyEntry()'} Add
-          .col-md-4
-            .col-md-4
-              %input.form-control{type: 'text', value: '00:00', placeholder: 'Start', 'ng-model' => 'manually_entry.start_to_s'}
-            .col-md-4
-              %input.form-control{type: 'text', value: '15', placeholder: 'Finish/duration', 'ng-model' => 'manually_entry.finish_to_s'}
-            .col-md-4
-              %input{type: "checkbox", checked: true, 'tablet-style' => true}
+          .col-md-4.col-sm-6
+            .row
+              .col-md-4.col-xs-4.col-sm-4.col-lg-4
+                %input.form-control{type: 'text', value: '00:00', placeholder: 'Start', 'ng-model' => 'manually_entry.start_to_s'}
+              .col-md-4.col-xs-4.col-sm-4.col-lg-4
+                %input.form-control{type: 'text', value: '15', placeholder: 'Finish/duration', 'ng-model' => 'manually_entry.finish_to_s'}
+              .col-md-4.col-xs-4.col-sm-4.col-lg-4
+                %input.hidden-sm.hidden-xs{type: "checkbox", checked: true, 'tablet-style' => true}
       .row.margin-top-10
         .col-md-12.popular_things
           %a{href: true, style: 'font-size: 120%;'} Обед
