@@ -1,7 +1,8 @@
 class Entry < ActiveRecord::Base
   belongs_to :category
+  belongs_to :user
 
-  validates :start, presence: true
+  #validates :start, presence: true
 
   default_scope {order('start DESC')}
 

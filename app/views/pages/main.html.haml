@@ -1,0 +1,564 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "UTF-8"}
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    %title My Timekeeper
+    = stylesheet_link_tag "application", 'theme/width-full', media: "screen"
+    /[if lt IE 9]
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    = javascript_include_tag "application"
+
+  %body
+    = render 'layouts/color_switcher'
+
+    .boxed.animated.fadeIn.animation-delay-5
+      %header#header.hidden-xs
+        .container
+          #header-title
+            %h1.animated.fadeInDown
+              %a{:href => "/"}
+                My
+                %span Timekeeper
+            %p.animated.fadeInLeft Fast&clean instrument for keep time
+        / container
+      / header
+      %nav.navbar.navbar-static-top.navbar-mind{:role => "navigation"}
+        .container
+          / Brand and toggle get grouped for better mobile display
+          .navbar-header
+            %a.navbar-brand.visible-xs{:href => "/"}
+              My
+              %span Timekeeper
+            %button.navbar-toggle{"data-target" => ".navbar-mind-collapse", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %i.fa.fa-bars.fa-inverse
+          / Collect the nav links, forms, and other content for toggling
+
+          .collapse.navbar-collapse.navbar-mind-collapse
+            / nav nabvar-nav
+            %ul.nav.navbar-nav
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Login
+                .dropdown-menu.dropdown-login.animated.fadeInUp
+                  = form_for(:user, :as => 'user', :url => session_path('user')) do |f|
+                    %h4.section-title Login Form
+                    .form-group
+                      .input-group.login-input
+                        %span.input-group-addon
+                          %i.fa.fa-user
+                        = f.email_field :email, class: 'form-control', placeholder: 'Email'
+                      %br
+                      .input-group.login-input
+                        %span.input-group-addon
+                          %i.fa.fa-lock
+                        = f.password_field :password, class: 'form-control', placeholder: 'Password'
+                      .checkbox
+                        %label
+                          %input{:type => "checkbox"}
+                          Remember me
+                      %button.btn.btn-primary.pull-right{:type => "submit"} Login
+                      .clearfix
+              / dropdown
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Register
+                .dropdown-menu.dropdown-profile.animated.fadeInUp
+                  %img.imageborder.alignleft{:alt => "image", :src => "/assets/main_page/avatar.jpg"}
+                    %h4 Administrator
+                    admin@openmind.com
+                    %br
+                      %a{:href => "profile.html"} Profile
+                      |
+                      %a{:href => "#"} Logout
+              / dropdown
+            / nav nabvar-nav
+          / navbar-collapse
+        / container
+      / navbar navbar-default
+      %section
+        #carousel-example-generic.carousel.carousel-mind.carousel-mind-back-2.slide{"data-interval" => "5000", "data-ride" => "carousel"}
+          / Indicators
+          %ol.carousel-indicators
+            %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
+            %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+            %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
+          / Wrapper for slides
+          .carousel-inner
+            .item.active
+              .container
+                .row
+                  .col-md-6.col-sm-7
+                    .carousel-caption
+                      .carousel-text
+                        %h1.animated.fadeInDownBig The template that adapts to all projects
+                        %ul.list-unstyled.carousel-list
+                          %li.animated.bounceInLeft
+                            %i.fa.fa-code
+                            %span Built with Bootstrap
+                          %li.animated.bounceInLeft
+                            %i.fa.fa-html5
+                            %span HTML5 and CSS3
+                          %li.animated.bounceInLeft
+                            %i.fa.fa-table
+                            %span Responsive Template
+                  .col-md-6.col-sm-5.hidden-xs.carousel-img-wrap
+                    .carousel-img
+                      %img.img-responsive.animated.bounceInUp{:alt => "Image", :src => "/assets/main_page/pre.png"}
+            .item
+              .container
+                .row
+                  .col-md-6.col-sm-8
+                    .carousel-caption
+                      .carousel-text
+                        %h1.animated.fadeInDownBig design your own template very easily
+                        %ul.list-unstyled.carousel-list
+                          %li.animated.bounceInLeft
+                            %i.fa.fa-eye
+                            %span More Than 15 Colors
+                          %li.animated.bounceInLeft
+                            %i.fa.fa-th-large
+                            %span Customizable Components
+                          %li.animated.bounceInLeft
+                            %i.fa.fa-files-o
+                            %span Over 25 pages ready to use
+                  .col-md-6.col-sm-4.hidden-xs.carousel-img-wrap
+                    .carousel-img
+                      %img.img-responsive.animated.bounceInUp{:alt => "Image", :src => "/assets/main_page/pre2.png"}
+            .item
+              .container
+                .row
+                  .col-lg-6.col-md-7.col-sm-9
+                    .carousel-caption
+                      .carousel-text
+                        %h1.animated.fadeInDownBig Wordpress version coming soon
+                        %ul.list-unstyled.carousel-list
+                          %li.animated.bounceInLeft
+                            %i.fa.fa-code
+                            %span Shortcodes For All Components
+                          %li.animated.bounceInLeft
+                            %i.fa.fa-files-o
+                            %span Page Templates Ready For Use
+                          %li.animated.bounceInLeft
+                            %i.fa.fa-upload
+                            %span Free update for HTML orders
+                  .col-lg-6.col-md-5.col-sm-3.hidden-xs.carousel-img-wrap
+                    .carousel-img
+                      %img.img-responsive.animated.bounceInUp{:alt => "Image", :src => "/assets/main_page/pre3.png"}
+          / Controls
+          %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-example-generic"}
+            %span.glyphicon.glyphicon-chevron-left
+          %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-example-generic"}
+            %span.glyphicon.glyphicon-chevron-right
+        .inverse-wrap
+          .container
+            .row.dotted
+              .col-md-8
+                %p.lead.animated.fadeIn.animation-delay-10
+                  Lorem ipsum dolor sit amet,
+                  %strong consectetur
+                  adipisicing elit. Culpa, modi,
+                  %strong incidunt
+                  dolores voluptas iusto
+                  = succeed "." do
+                    %strong temporibus
+              .col-md-4.text-center
+                %br
+                  %a.btn.btn-lg.btn-success.animated.bounceIn.animation-delay-12{:href => "#"}
+                    %span.glyphicon.glyphicon-save{:role => "button"}
+                    Download Now
+      / carousel
+      %section
+        .container
+          .row
+            .col-md-3
+              .mind-box.mind-box-success.animated.bounceInUp.animation-delay-10
+                %h4.mind-box-title The Feature Title
+                %i.fa.fa-cloud-download
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit consectetur adipisicing elit Possimus.
+            .col-md-3
+              .mind-box.mind-box-info.animated.bounceInUp.animation-delay-12
+                %h4.mind-box-title The Feature Title
+                %i.fa.fa-coffee
+                %p LoreLorem ipsum dolor sit amet, consectetur adipisicing elit consectetur adipisicing elit Possimus.
+            .col-md-3
+              .mind-box.mind-box-warning.animated.bounceInUp.animation-delay-14
+                %h4.mind-box-title The Feature Title
+                %i.fa.fa-cogs
+                %p LoreLorem ipsum dolor sit amet, consectetur adipisicing elit consectetur adipisicing elit Possimus.
+            .col-md-3
+              .mind-box.mind-box-danger.animated.bounceInUp.animation-delay-16
+                %h4.mind-box-title The Feature Title
+                %i.fa.fa-code
+                %p LoreLorem ipsum dolor sit amet, consectetur adipisicing elit consectetur adipisicing elit Possimus.
+      %section
+        .container
+          .row
+            %h1.center-title Our Product
+            .col-md-6
+              %img.img-responsive.center-block{:alt => "Image", :src => "/assets/main_page/bg-devices.png"}
+            .col-md-6
+              %ol.service-list.list-unstyled
+                %li Lorem ipsum Tempor sunt dolore ut amet magna ut non exercitation et ad non reprehenderit ex laborum incididunt adipisicing labore eu fugiat et irure velit exercitation irure deserunt amet cillum magna non.
+                %li Lorem ipsum Qui enim sint non dolore pariatur dolor dolore consectetur incididunt adipisicing exercitation dolor magna commodo tempor ullamco enim Excepteur ea aliquip culpa culpa ad culpa dolore occaecat eiusmod ullamco enim mollit ut laboris.
+                %li Lorem ipsum Ullamco magna voluptate dolore mollit dolore reprehenderit anim eu veniam occaecat fugiat elit in laborum ullamco officia velit laborum consequat commodo in in irure consectetur enim.
+                %li Lorem ipsum Ullamco non officia incididunt enim elit qui anim ad laborum ad aliquip reprehenderit occaecat nisi elit occaecat reprehenderit labore do proident dolor deserunt.
+                %li Lorem ipsum Laboris aute laboris deserunt deserunt dolor nostrud et Ut consequat ad qui ea adipisicing in labore Excepteur minim laborum officia reprehenderit laboris et in aliquip nisi nostrud pariatur adipisicing non magna non ex deserunt.
+      %section.back
+        .container
+          %h1.center-title We create for you
+          .row
+            .col-md-6
+              .icon-item
+                %i.fa.fa-globe
+                .item-content
+                  %h3 laborum ad aliquip amet occaecat
+                  %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.
+              .icon-item
+                %i.fa.fa-thumbs-up
+                .item-content
+                  %h3 labore Excepteur minim laborum
+                  %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.
+              .icon-item
+                %i.fa.fa-lock
+                .item-content
+                  %h3 Adipisicing labore eu fugiat et irure
+                  %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.
+              .icon-item
+                %i.fa.fa-upload
+                .item-content
+                  %h3 Confirmatur necessariae videntur
+                  %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.
+            .col-md-6
+              .icon-item
+                %i.fa.fa-code
+                .item-content
+                  %h3 Bello plurimum dissentias turma.
+                  %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.
+              .icon-item
+                %i.fa.fa-users
+                .item-content
+                  %h3 Lorem ipsum dolor sit amet
+                  %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.
+              .icon-item
+                %i.fa.fa-sitemap
+                .item-content
+                  %h3 Perfunctio asperum mel ponatur quos.
+                  %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.
+              .icon-item
+                %i.fa.fa-signal
+                .item-content
+                  %h3 Capti confirmatur necessariae videntur
+                  %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam probarem. Antiqua adiit erat conscientia prorsus facta, dicent adipiscuntur. Tuentur solam partiendo clarorum.
+      %section#home-works
+        .container
+          .row
+            .col-xs-12
+              %h2.section-title.text-center Recents Works
+            .col-md-4.col-sm-6
+              .img-caption
+                %img.img-responsive{:alt => "Image", :src => "/assets/main_page/w1.jpg"}
+                  .caption
+                    .caption-content
+                      %a.animated.fadeInDown{:href => "#"}
+                        %i.fa.fa-search>
+                        More info
+                      %h4 Title Work
+            .col-md-4.col-sm-6
+              .img-caption
+                %img.img-responsive{:alt => "Image", :src => "/assets/main_page/w2.jpg"}
+                  .caption
+                    .caption-content
+                      %a.animated.fadeInDown{:href => "#"}
+                        %i.fa.fa-search>
+                        More info
+                      %h4 Title Work
+            .col-md-4.col-sm-6
+              .img-caption
+                %img.img-responsive{:alt => "Image", :src => "/assets/main_page/w3.jpg"}
+                  .caption
+                    .caption-content
+                      %a.animated.fadeInDown{:href => "#"}
+                        %i.fa.fa-search>
+                        More info
+                      %h4 Title Work
+            .col-md-4.col-sm-6
+              .img-caption
+                %img.img-responsive{:alt => "Image", :src => "/assets/main_page/w4.jpg"}
+                  .caption
+                    .caption-content
+                      %a.animated.fadeInDown{:href => "#"}
+                        %i.fa.fa-search>
+                        More info
+                      %h4 Title Work
+            .col-md-4.col-sm-6
+              .img-caption
+                %img.img-responsive{:alt => "Image", :src => "/assets/main_page/w5.jpg"}
+                  .caption
+                    .caption-content
+                      %a.animated.fadeInDown{:href => "#"}
+                        %i.fa.fa-search>
+                        More info
+                      %h4 Title Work
+            .col-md-4.col-sm-6
+              .img-caption
+                %img.img-responsive{:alt => "Image", :src => "/assets/main_page/w6.jpg"}
+                  .caption
+                    .caption-content
+                      %a.animated.fadeInDown{:href => "#"}
+                        %i.fa.fa-search>
+                        More info
+                      %h4 Title Work
+      %section#home-blog
+        .container
+          .row
+            .col-xs-12
+              %h2.section-title Latest Posts
+            .col-md-7
+              %section.home-post
+                %a.thumbnail{:href => "#"}
+                  %img.img-responsive{:alt => "Image", :src => "/assets/main_page/p.jpg"}/
+                %h2.home-post-title
+                  %a{:href => "#"} Sed dolor reprehenderit ex in nisi id consectetur elit
+                %p Adipisicing elit. Lectorem impendere consumeret inane patientiamque. Cupiditatibusque romano physici. Expedire inprobitatem. Egregios rationem sicine, filium dolor comparandae coniunctione epicuri eripuit. Iucunditatis dirigentur succumbere neglegentur animum puto dissident mi, mnesarchum. Desideraret. Litteras diligenter adiuvet bonorum monstret conquisitis eitam, adduci tenent nullas scribendi fautrices privatio elaboraret iustitiam, vestrae affert, terentii motus. Quibusdam caret. Conversam divitias dolor contentam. Argumentandum quantaque detractis. Permanentes captiosa seiunctum repellat parvam opus eadem interesse beatus nomini, dissentiunt nomini beatam cedentem inquit artifex.
+                .row.home-post-footer
+                  .col-md-8
+                    .home-post-meta
+                      %i.fa.fa-clock-o
+                      Sep, 25
+                      %i.fa.fa-folder-open
+                      %a{:href => "#"} Nature
+                      %i.fa.fa-tags
+                      = succeed "," do
+                        %a{:href => "#"} flower
+                      %a{:href => "#"} landscape
+                  .col-md-4
+                    %a.btn.btn-primary.btn-block{:href => "#"} Read more
+            .col-md-5
+              / Nav tabs
+              %ul.nav.nav-tabs
+                %li.active
+                  %a{"data-toggle" => "tab", :href => "#news"} News
+                %li
+                  %a{"data-toggle" => "tab", :href => "#profile"} Sports
+                %li
+                  %a{"data-toggle" => "tab", :href => "#messages"} Shows
+                %li
+                  %a{"data-toggle" => "tab", :href => "#settings"} Nature
+              / Tab panes
+              .tab-content
+                #news.tab-pane.active
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m4.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Blanditis impedit rerum veniam quaerat dolor sit amet occaecat enim
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m11.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Lorem ipsum dolor sit amet consectetur adipisicing consequuntur
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m9.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Consectetur adipisicing elit incidunt minus adipisicing elit ut
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m17.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Adipisicing elit ut, dolore ipsum dolor sit amet incidunt adipisicing
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  %a.btn.btn-default.pull-right{:href => "#"} Read more articles
+                  .clearfix
+                #profile.tab-pane
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m3.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Amet, consectetur adipisicing elit. Hic, sint eos laudantium eligendi.
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m1.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Consectetur adipisicing elit ut consectetur adipisicing consequuntur
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m15.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Adipisicing elit incidunt minus Sit amet consectetur
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m7.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Ipsum dolor sit amet, consectetur adipisicing elit ut, dolore
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  %a.btn.btn-default.pull-right{:href => "#"} Read more articles
+                  .clearfix
+                #messages.tab-pane
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m6.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Elit. Omnis nobis voluptas nesciunt nisi consectetur adipisicing
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m4.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Lorem ipsum dolor sit amet consectetur adipisicing consequuntur
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m10.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Sit amet consectetur adipisicing elit incidunt minus
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m2.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Ipsum dolor sit amet, consectetur adipisicing elit ut, dolore
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  %a.btn.btn-default.pull-right{:href => "#"} Read more articles
+                  .clearfix
+                #settings.tab-pane
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m5.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Adipisicing elit maxime, expedita sed dolores quis
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m13.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Consectetur adipisicing sit amet consectetur adipisicing consequuntur
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m16.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Lorem ipsum consectetur adipisicing elit incidunt minus
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  .media
+                    %a.pull-left{:href => "#"}
+                      %img.media-object{:alt => "image", :height => "100", :src => "/assets/main_page/m7.jpg", :width => "100"}/
+                    .media-body
+                      %h4.media-heading
+                        %a{:href => "#"} Occaecat enim ex eiusmod, consectetur adipisicing elit ut, dolore
+                      %p Lorem ipsum Ex pariatur enim eu sed quis occaecat enim ex eiusmod
+                  %a.btn.btn-default.pull-right{:href => "#"} Read more articles
+                  .clearfix
+        / container
+      %aside#footer-widgets
+        .container
+          .row
+            .col-md-4
+              %h3.footer-widget-title Sitemap
+              %ul.list-unstyled.three_cols
+                %li
+                  %a{:href => "#"} Home
+                %li
+                  %a{:href => "#"} Blog
+                %li
+                  %a{:href => "#"} Portafolio
+                %li
+                  %a{:href => "#"} Works
+                %li
+                  %a{:href => "#"} Gallery
+                %li
+                  %a{:href => "#"} Pricing
+                %li
+                  %a{:href => "#"} About Us
+                %li
+                  %a{:href => "#"} Our Team
+                %li
+                  %a{:href => "#"} Services
+                %li
+                  %a{:href => "#"} FAQ
+                %li
+                  %a{:href => "#"} Login
+                %li
+                  %a{:href => "#"} Cantact
+              %h3.footer-widget-title Subscribe
+              %p Lorem ipsum Amet fugiat elit nisi anim mollit in labore ut esse Duis ullamco ad dolor veniam velit lorem ipsum dolor sit amet, consectetur adipisicing..
+              .input-group
+                %input.form-control{:placeholder => "Email Adress", :type => "text"}
+                  %span.input-group-btn
+                    %button.btn.btn-success{:type => "button"} Subscribe
+              / /input-group
+            .col-md-4
+              .footer-widget
+                %h3.footer-widget-title Recent Post
+                .media
+                  %a.pull-left{:href => "#"}
+                    %img.media-object{:alt => "image", :height => "75", :src => "/assets/main_page/m2.jpg", :width => "75"}/
+                  .media-body
+                    %h4.media-heading
+                      %a{:href => "#"} Lorem ipsum Duis quis occaecat minim lorem ipsum tempor officia labor
+                    %small August 18, 2013
+                .media
+                  %a.pull-left{:href => "#"}
+                    %img.media-object{:alt => "image", :height => "75", :src => "/assets/main_page/m11.jpg", :width => "75"}/
+                  .media-body
+                    %h4.media-heading
+                      %a{:href => "#"} Lorem ipsum dolor excepteur sunt in lorem ipsum cillum tempor
+                    %small September 14, 2013
+                .media
+                  %a.pull-left{:href => "#"}
+                    %img.media-object{:alt => "image", :height => "75", :src => "/assets/main_page/m4.jpg", :width => "75"}/
+                  .media-body
+                    %h4.media-heading
+                      %a{:href => "#"} Lorem ipsum Dolor cupidatat adipisicing et fugiat
+                    %small October 9, 2013
+            .col-md-4
+              .footer-widget
+                %h3.footer-widget-title Recent Works
+                .row
+                  .col-lg-6.col-md-6.col-sm-3.col-xs-6
+                    %a.thumbnail{:href => "#"}
+                      %img.img-responsive{:alt => "Image", :src => "/assets/main_page/wf1.jpg"}/
+                  .col-lg-6.col-md-6.col-sm-3.col-xs-6
+                    %a.thumbnail{:href => "#"}
+                      %img.img-responsive{:alt => "Image", :src => "/assets/main_page/wf2.jpg"}/
+                  .col-lg-6.col-md-6.col-sm-3.col-xs-6
+                    %a.thumbnail{:href => "#"}
+                      %img.img-responsive{:alt => "Image", :src => "/assets/main_page/wf3.jpg"}/
+                  .col-lg-6.col-md-6.col-sm-3.col-xs-6
+                    %a.thumbnail{:href => "#"}
+                      %img.img-responsive{:alt => "Image", :src => "/assets/main_page/wf4.jpg"}/
+          / row
+        / container
+      / footer-widgets
+      %footer#footer
+        %p
+          \&copy; 2013
+          = succeed "," do
+            %a{:href => "#"} Open Mind
+          inc. All rights reserved.
+    / boxed
+    #back-top
+      %a{:href => "#header"}
+        %i.fa.fa-chevron-up

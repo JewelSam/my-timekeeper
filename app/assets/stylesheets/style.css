@@ -34,6 +34,8 @@ button.btn-danger.my-colors {
     border-color: #820000;
 }
 
+.font-light-gray {color: #CECECE;}
+.font-gray { color: #737373; }
 
 /* main page */
 .navbar-mind {
@@ -45,8 +47,23 @@ button.btn-danger.my-colors {
     border-right: 0;
 }
 
-.current_entry button.btn-default:focus, .current_entry button.btn-default:active, .current_entry button.btn-default:hover {
+.current_entry .btn-default:not(button):focus, .current_entry .btn-default:not(button):active, .current_entry .btn-default:not(button):hover {
     background-color: #ffffff;
+}
+
+.current_entry .stop {display: none;}
+.active .current_entry .start {display: none;}
+.active .current_entry .stop {display: inline-block;}
+
+#form_edit_time {
+    padding: 20px;
+    width: 300px;
+    /*right: 0;*/
+    /*left: auto;*/
+}
+
+#form_edit_time [datepicker] {
+    margin: 20px 0;
 }
 
 .caption-row {
@@ -76,8 +93,7 @@ button.btn-danger.my-colors {
     white-space:nowrap;
 }
 
-table tr td.my-help-block{
-    color: #737373;
+table tr td.font-gray{
     font-size: 75%;
 }
 

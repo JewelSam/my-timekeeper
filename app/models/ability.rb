@@ -8,13 +8,9 @@ class Ability
       can :manage, :all
       can :access, :rails_admin   # grant access to rails_admin
       can :dashboard              # grant access to the dashboard
-      cannot :manage, User
-      cannot :manage, Role
-      cannot [:create, :destroy], MyConfig
-    elsif user and user.role?('superadmin')
-      can :manage, :all
-      can :access, :rails_admin   # grant access to rails_admin
-      can :dashboard              # grant access to the dashboard
+    elsif user
+      can :manage, Category, user: user
+      can :manage, Entry, user: user
     end
     # Define abilities for the passed in user here. For example:
     #

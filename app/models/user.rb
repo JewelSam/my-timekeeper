@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   belongs_to :role
   has_many :categories
+  has_many :entries
 
   def role?(name)
     role and role.name == name

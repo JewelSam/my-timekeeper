@@ -20,5 +20,5 @@
           = link_to '#' do
             %span.glyphicon.glyphicon-cog
         %li
-          = link_to '#' do
+          = link_to destroy_user_session_path, :method => :delete do
             %span.glyphicon.glyphicon-log-out

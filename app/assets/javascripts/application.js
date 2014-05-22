@@ -10,18 +10,19 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
 //= require theme/jquery-1.10.2.min
+//= require jquery_ujs
 //= require theme/jquery.cookie
 //= require theme/bootstrap.min
 //= require theme/jquery.mixitup.min
+//= require theme/lightbox-2.6.min
 //= require theme/holder
 //= require theme/app
 //= require theme/styleswitcher
 //= require angular/lib/angular.min
 //= require angular/lib/angular-route.min
 //= require angular/lib/angular-sanitize.min
+//= require lib/jquery-ui-1.10.4.custom.min
 //= require lib/jquery.form.min
 //= require lib/jquery.validate.min
 //= require lib/bootstrap-switch

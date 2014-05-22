@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513123209) do
+ActiveRecord::Schema.define(version: 20140520053351) do
 
   create_table "categories", force: true do |t|
     t.integer  "user_id"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20140513123209) do
     t.datetime "finish"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.boolean  "current"
   end
 
   create_table "my_configs", force: true do |t|
