@@ -13,23 +13,6 @@
             %button.btn.btn-warning.my-colors.stop{:type => "button", 'ng-click' => 'stopEntry()'} Stop
       / /input-group
 
-      .dropdown-menu#form_edit_time{style: 'display: none;'}
-        .row.caption-row
-          .col-md-6 Start
-          .col-md-6 Finish
-        .row
-          .col-md-6
-            %input.form-control{type: 'text', placeholder: 'Start', 'ng-model' => 'edit_entry.start'}
-          .col-md-6
-            %input.form-control{type: 'text', placeholder: 'Finish', 'ng-model' => 'edit_entry.finish', 'ng-disabled' => 'edit_entry.current'}
-        .row
-          .col-md-12
-            %input.hidden{type: 'text'}
-            %div{'datepicker' => true}
-        .row
-          .col-md-12
-            %button.btn.btn-primary.btn-block{:type => "button", 'ng-click' => 'saveEditedTime()'} Apply
-
       %article.component-element
         %h3.margin-bottom-10 Add manually
         .panel.panel-default
@@ -94,9 +77,12 @@
                     %span.glyphicon.glyphicon-remove.font-light-gray{'ng-click' => 'destroyEntry(entry)'}
                   %td
                     {{entry.title}}
-                    %span.label.label-warning.my-colors {{categories[entry.category_id].title}}
-                  %td {{duration(entry)}}
-                  %td.font-gray {{entry.start_to_i.toHHMM()}}-{{entry.finish_to_i.toHHMM()}}
+                    %span.label.label-warning.my-colors
+                      {{categories[entry.category_id].title}}
+                  %td
+                    {{duration(entry)}}
+                  %td.font-gray{ 'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true}
+                    {{entry.start_to_i.toHHMM()}}-{{entry.finish_to_i.toHHMM()}}
 
         .row
           .col-md-12= link_to 'Show more', '#'
@@ -114,3 +100,20 @@
             %button.btn.btn-success.my-colors{style: 'width: 49%;'} Работа 6h
             %button.btn.btn-danger.my-colors{style: 'width: 20%;'} Еда 2h 30min
             %button.btn.btn-info.my-colors{style: 'width: 30%;'} Сплю 9h
+
+.dropdown-menu#form_edit_time{style: 'display: none;'}
+  .row.caption-row
+    .col-md-6 Start
+    .col-md-6 Finish
+  .row
+    .col-md-6
+      %input.form-control{type: 'text', placeholder: 'Start', 'ng-model' => 'edit_entry.start'}
+    .col-md-6
+      %input.form-control{type: 'text', placeholder: 'Finish', 'ng-model' => 'edit_entry.finish', 'ng-disabled' => 'edit_entry.current'}
+  .row
+    .col-md-12
+      %input.hidden{type: 'text'}
+      %div{'datepicker' => true}
+  .row
+    .col-md-12
+      %button.btn.btn-primary.btn-block{:type => "button", 'ng-click' => 'saveEditedTime()'} Apply
