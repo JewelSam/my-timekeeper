@@ -1,0 +1,29 @@
+%article.component-element.margin-top-20.list_of_entries
+  .row
+    .col-md-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %th
+              %input{type: 'checkbox', 'ng-checked' => 'allChecked()', 'ng-click' => 'allCheck()'}
+              %span.glyphicon.glyphicon-remove.font-light-gray{'ng-click' => 'destroyEntry()'}
+            %th Today
+            %th Time
+            %th
+        %tbody
+          %tr{'ng-repeat' => 'entry in entries'}
+            %td
+              %input{type: 'checkbox', 'ng-model' => 'entry.checked'}
+              %span.glyphicon.glyphicon-play.font-light-gray{'ng-click' => 'setCurrentEntry(entry)'}
+              %span.glyphicon.glyphicon-remove.font-light-gray{'ng-click' => 'destroyEntry(entry)'}
+            %td
+              {{entry.title}}
+              %span.label.label-warning.my-colors
+                {{categories[entry.category_id].title}}
+            %td{'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true}
+              {{duration(entry)}}
+            %td.font-gray{ 'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true}
+              {{entry.start_to_i.toHHMM()}}-{{entry.finish_to_i.toHHMM()}}
+
+  .row
+    .col-md-12= link_to 'Show more', '#'

@@ -1,0 +1,16 @@
+.dropdown-menu#form_edit_time{style: 'display: none;'}
+  .row.caption-row
+    .col-md-6 Start
+    .col-md-6 Finish
+  .row
+    .col-md-6
+      %input.form-control{type: 'text', placeholder: 'Start', 'ng-model' => 'edit_entry.start_to_s'}
+    .col-md-6
+      %input.form-control{type: 'text', placeholder: 'Finish', 'ng-model' => 'edit_entry.finish_to_s', 'ng-disabled' => 'edit_entry.current'}
+  .row
+    .col-md-12
+      %input.hidden{type: 'text'}
+      %div{'datepicker' => true}
+  .row
+    .col-md-12
+      %button.btn.btn-primary.btn-block{:type => "button", 'ng-click' => 'saveEditedTime()'} Apply

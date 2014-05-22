@@ -1,0 +1,9 @@
+%form{'ng-submit' => 'createEntry()', 'ng-class' => '{active: current_entry.current}', name: 'newEntry'}
+  .input-group.input-group-lg.current_entry
+    %input.form-control{type: "text", placeholder: 'What are you working on?', 'ng-model' => 'current_entry.title', 'ng-change' => 'saveCurrentEntry()'}
+    %span.input-group-btn
+      %select.btn.btn-default{'ng-model' => 'current_entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order", 'ng-change' => 'saveCurrentEntry()'}
+        %option{value: ''} Category...
+      %span.btn.btn-default{:type => "button", 'ng-click' => 'showFormEditTime(current_entry)', 'show-form-edit-time' => true} {{duration(current_entry)}}
+      %button.btn.btn-success.start{:type => "button", 'ng-click' => 'createEntry()'} Start
+      %button.btn.btn-warning.my-colors.stop{:type => "button", 'ng-click' => 'stopEntry()'} Stop

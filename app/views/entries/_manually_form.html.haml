@@ -1,0 +1,43 @@
+%article.component-element
+  %h3.margin-bottom-10 Add manually
+  .panel.panel-default
+    .panel-body
+      .row.caption-row.hidden-xs
+        .col-md-4.col-md-offset-8
+          .col-md-4 Start
+          .col-md-4 Finish/duration
+          .col-md-4 Replace
+      .row
+        %form{'ng-submit' => 'saveEntry(manually_entry)', name: 'manuallyEntry'}
+          .col-md-8
+            .input-group
+              %input.form-control{type: "text", placeholder: 'Stuff you forgot', 'ng-model' => 'manually_entry.title'}
+              %span.input-group-btn
+                %select.btn.btn-default{'ng-model' => 'manually_entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order"}
+                  %option{value: ''} Category...
+                %button.btn.btn-success{:type => "button", 'ng-click' => 'saveEntry(manually_entry)'} Add
+          .col-md-4
+            .col-md-4
+              %input.form-control{type: 'text', value: '00:00', placeholder: 'Start', 'ng-model' => 'manually_entry.start'}
+            .col-md-4
+              %input.form-control{type: 'text', value: '15', placeholder: 'Finish/duration', 'ng-model' => 'manually_entry.finish'}
+            .col-md-4
+              %input{type: "checkbox", checked: true, 'tablet-style' => true}
+      .row.margin-top-10
+        .col-md-12.popular_things
+          %a{href: true, style: 'font-size: 120%;'} Обед
+          %a{href: true} Сплю
+          %a{href: true} Готовлю ужин
+          %a{href: true, style: 'font-size: 110%;'} С костей
+          %a{href: true} Завтрак
+          %a{href: true, style: 'font-size: 130%;'} Утренние дела
+          %a{href: true} Массаж
+          %a{href: true, style: 'font-size: 90%;'} План меню
+      -#.row.margin-top-10
+        .col-md-12
+          %span.label.label-default 5 min
+          %span.label.label-primary 10 min
+          %span.label.label-success 15 min
+          %span.label.label-info 20 min
+          %span.label.label-warning 30 min
+          %span.label.label-danger 1 hour
