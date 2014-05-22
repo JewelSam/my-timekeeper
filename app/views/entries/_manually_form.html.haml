@@ -8,19 +8,19 @@
           .col-md-4 Finish/duration
           .col-md-4 Replace
       .row
-        %form{'ng-submit' => 'saveEntry(manually_entry)', name: 'manuallyEntry'}
+        %form{'ng-submit' => 'saveManuallyEntry()', name: 'manuallyEntry'}
           .col-md-8
             .input-group
               %input.form-control{type: "text", placeholder: 'Stuff you forgot', 'ng-model' => 'manually_entry.title'}
               %span.input-group-btn
-                %select.btn.btn-default{'ng-model' => 'manually_entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order"}
+                %select.btn.btn-default.form-control{'ng-model' => 'manually_entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order"}
                   %option{value: ''} Category...
-                %button.btn.btn-success{:type => "button", 'ng-click' => 'saveEntry(manually_entry)'} Add
+                %button.btn.btn-success{:type => "button", 'ng-click' => 'saveManuallyEntry()'} Add
           .col-md-4
             .col-md-4
-              %input.form-control{type: 'text', value: '00:00', placeholder: 'Start', 'ng-model' => 'manually_entry.start'}
+              %input.form-control{type: 'text', value: '00:00', placeholder: 'Start', 'ng-model' => 'manually_entry.start_to_s'}
             .col-md-4
-              %input.form-control{type: 'text', value: '15', placeholder: 'Finish/duration', 'ng-model' => 'manually_entry.finish'}
+              %input.form-control{type: 'text', value: '15', placeholder: 'Finish/duration', 'ng-model' => 'manually_entry.finish_to_s'}
             .col-md-4
               %input{type: "checkbox", checked: true, 'tablet-style' => true}
       .row.margin-top-10
