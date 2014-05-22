@@ -1,4 +1,4 @@
-App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce', '$interval', ($scope, $route, $http, $rootScope, $sce, $interval) ->
+App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce', '$interval', '$timeout', ($scope, $route, $http, $rootScope, $sce, $interval, $timeout) ->
   $scope.categories = []
   $scope.categories_order = []
   $scope.entries = []
@@ -94,5 +94,18 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
       $scope.entries = data['entries']
       $scope.update_entries()
     ).error((data) -> show_error(data['errors']))
+
+  $scope.showEditForm = (entry) -> entry.edited = true
+
+  $scope.saveEditedEntry = (entry) ->
+    entry.edited = false
+    $scope.saveEntry(entry)
+
+  onFormBlur = ''
+  $scope.onBlurInputEditedForm = (entry) ->
+    onFormBlur = $timeout(
+      -> $scope.saveEditedEntry(entry)
+    , 100)
+  $scope.onFocusInputEditedForm = -> $timeout.cancel(onFormBlur)
 
 ])

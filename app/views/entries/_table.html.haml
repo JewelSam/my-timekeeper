@@ -12,17 +12,23 @@
             %th Time
             %th
         %tbody
-          %tr{'ng-repeat' => 'entry in entries'}
+          %tr{'ng-repeat' => 'entry in entries', 'ng-class' => '{edited: entry.edited}'}
             %td
               %input{type: 'checkbox', 'ng-model' => 'entry.checked'}
               &nbsp;
               %i.fa.fa-play.button-play{ 'ng-click' => 'setCurrentEntry(entry)'}
               &nbsp;
               %i.fa.fa-trash-o.button-delete{ 'ng-click' => 'destroyEntry(entry)'}
-            %td
-              {{entry.title}}
-              %span.label.label-warning.my-colors
+            %td{'ng-click' => 'showEditForm(entry)'}
+              %span.title {{entry.title}}
+              %span.label.label-warning.my-colors.category
                 {{categories[entry.category_id].title}}
+              %form.edit_entry{'ng-submit' => 'saveEditedEntry(entry)'}
+                .input-group
+                  %input.form-control{type: "text", 'ng-model' => 'entry.title', 'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
+                  %span.input-group-btn
+                    %select.btn.btn-default{'ng-model' => 'entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order", 'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
+                      %option{value: ''} Category...
             %td{'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true}
               {{duration(entry)}}
             %td.font-gray{ 'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true}
