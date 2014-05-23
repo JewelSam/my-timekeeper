@@ -61,11 +61,21 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     $scope.saveEntry($scope.edit_entry)
 
   #  MANUALLY ADD ENTRY ###############################################################################
-  $scope.manually_entry = {title: '', start_to_s: new Date().toHHMM(), finish_to_s: new Date().toHHMM()}
+  $scope.manually_entry = {title: '', start_to_s: new Date().toHHMM(), finish_to_s: new Date().toHHMM(), manually: true}
   $scope.saveManuallyEntry = ->
-    $scope.manually_entry.start = $scope.manually_entry.start_to_s.fromHHMM()
-    $scope.manually_entry.finish = $scope.manually_entry.finish_to_s.fromHHMM()
+    date = $( ".manually-form [datepicker]" ).datepicker( "getDate" )
+    $scope.manually_entry.start = $scope.manually_entry.start_to_s.fromHHMM(date)
+    $scope.manually_entry.finish = $scope.manually_entry.finish_to_s.fromHHMM(date)
     $scope.saveEntry($scope.manually_entry)
+
+  onTimeBlur = ''
+  $scope.blur_time = ->
+    onTimeBlur = $timeout(
+      -> $scope.manually_entry.focus_time = false
+    , 100)
+  $scope.focus_time = ->
+    $scope.manually_entry.focus_time = true
+    $timeout.cancel(onTimeBlur)
 
 #  TABLE ENTRIES ###############################################################################
   $scope.checked = -> (entry for entry in $scope.entries when entry.checked)
