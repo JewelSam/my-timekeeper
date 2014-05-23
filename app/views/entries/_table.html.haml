@@ -27,7 +27,6 @@
                 {{categories[entry.category_id].title}}
               %form.edit_entry{'ng-submit' => 'saveEditedEntry(entry)'}
                 .input-group
-                  {{entry.edited}}
                   %input.form-control{type: "text", 'ng-model' => 'entry.title',"focus-me"=> "true" ,'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
                   %span.input-group-btn
                     %select.btn.btn-default{'ng-model' => 'entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order", 'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
