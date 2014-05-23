@@ -166,8 +166,11 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     ids = if entry.id then [entry.id] else $scope.checked(group).map((en) -> en.id)
 
     $http({method: 'POST', url: "/entries/destroy", data: {ids: ids}}).success((data) ->
+      i = 0
       for key,entry of $scope.entries
-        $scope.entries.splice(key, 1) if entry.id in ids
+        if entry.id in ids
+          $scope.entries.splice(key - i, 1)
+          i = i + 1
       $scope.update_entries()
     ).error((data) -> show_error(data['errors']))
 
