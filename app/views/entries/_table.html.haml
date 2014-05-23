@@ -10,8 +10,8 @@
               %i.fa.fa-trash-o.button-delete{'ng-click' => 'destroyEntry({},g_entries)'}
             %th
               {{g_entries.title}}
-            %th Time
-            %th
+            %th{:width=>'125px'} Time
+            %th{:width=>'75px'}
         %tbody
           %tr{'ng-repeat' => 'entry in g_entries["data"]', 'ng-class' => '{edited: entry.edited}'}
             %td
@@ -31,9 +31,9 @@
                   %span.input-group-btn
                     %select.btn.btn-default{'ng-model' => 'entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order", 'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
                       %option{value: ''} Category...
-            %td{'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true}
+            %td{'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true,:style=>'width:125px'}
               {{duration(entry)}}
-            %td.font-gray{ 'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true}
+            %td.font-gray{ 'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true,:style=>'width:75px'}
               {{entry.start_to_i.toHHMM()}}-{{entry.finish_to_i.toHHMM()}}
 
   .row

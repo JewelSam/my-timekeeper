@@ -78,7 +78,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     if entry.current
       data.finish = null
     else
-      data.finish = new Date()
+      data.finish = new Date() unless is_edit_time
 
     $http({method: 'POST', url: "/entries/update", data: data}).success((data) ->
       is_new = entry.is_new
@@ -167,7 +167,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
     $http({method: 'POST', url: "/entries/destroy", data: {ids: ids}}).success((data) ->
       i = 0
-      for key,entry of $scope.entries
+      for key,entry of angular.copy($scope.entries)
         if entry.id in ids
           $scope.entries.splice(key - i, 1)
           i = i + 1
