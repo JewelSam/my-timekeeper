@@ -6,7 +6,7 @@ $ ->
     $(this).ajaxSubmit(
       success: (data, textStatus, jqXHR) ->
         remove_all_alerts()
-        window.location.reload()
+        window.location.href = '/pages/successful_sign_in'
       error: (data) =>
         remove_all_alerts()
         show_alert_in_form($(this), 'error', data.responseText)
@@ -20,7 +20,7 @@ $ ->
         console.log $(data)
 
         if $(data).filter('div.boxed').children('ng-view').length > 0
-          window.location.reload()
+          window.location.href = '/pages/successful_register'
         else
           $(data).filter('div.boxed').find('form#new_user #error_explanation li').each ->
             message = $(this).html()

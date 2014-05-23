@@ -4,6 +4,8 @@ MyTimekeeper::Application.routes.draw do
   post 'entries/destroy'
 
   get '/pages/:id-:alias' => 'pages#show', as: 'page'
+  get 'pages/successful_register'
+  get 'pages/successful_sign_in'
   root 'pages#home'
 
   get '/500' => 'errors#server_error'
