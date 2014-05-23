@@ -5,9 +5,9 @@
         %thead
           %tr
             %th
-              %input{type: 'checkbox', 'ng-checked' => 'allChecked()', 'ng-click' => 'allCheck()'}
+              %input{type: 'checkbox', 'ng-checked' => 'allChecked(g_entries)', 'ng-click' => 'allCheck(g_entries)'}
               &nbsp;
-              %i.fa.fa-trash-o.button-delete{'ng-click' => 'destroyEntry()'}
+              %i.fa.fa-trash-o.button-delete{'ng-click' => 'destroyEntry({},g_entries)'}
             %th
               {{g_entries.title}}
             %th Time
