@@ -91,6 +91,7 @@ button.btn-danger.my-colors {
 
 /* manually add */
 .manually-form [datepicker] {
+    display: none;
     position: absolute;
     top: 40px;
     left: 0;

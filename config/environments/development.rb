@@ -1,6 +1,15 @@
 MyTimekeeper::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => 'baci.lindsaar.net',
+      :user_name            => 'plan.menu.contact@gmail.com',
+      :password             => 'zxc45sfh',
+      :authentication       => 'plain',
+      :enable_starttls_auto => true  }
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -26,4 +35,6 @@ MyTimekeeper::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
