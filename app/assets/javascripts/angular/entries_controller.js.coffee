@@ -25,7 +25,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     yesterday = yesterday.toYYYYMMDD();
-    old_sort_date = today
+    old_sort_date = ''
     $scope.group_entries[0] = {'title':'Today','data':[]}
 
     for entry in $scope.entries
@@ -36,8 +36,9 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
       if old_sort_date != entry.sort_date
         i = i + 1
         title = entry.sort_date
+        if entry.sort_date == today then title = 'Today'
         if entry.sort_date == yesterday then title = 'Yesterday'
-        $scope.group_entries[i] = {'title':title,'data':[]}
+        $scope.group_entries[i] = {'title':title, sort_date:entry.sort_date ,'data':[]}
         old_sort_date = entry.sort_date
 
       $scope.group_entries[i]['data'].push entry
@@ -73,21 +74,33 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.showFormEditTime = (entry) ->
     $scope.edit_entry = entry
     $scope.edit_entry.start_to_s = if entry.start then entry.start.toHHMM() else ''
+    $( "#form_edit_time [datepicker]" ).datepicker( "setDate", entry.start || new Date() );
     unless entry.current
       $scope.edit_entry.finish_to_s = if entry.finish then entry.finish.toHHMM() else ''
 
   $scope.saveEditedTime =  ->
-    $scope.edit_entry.start = $scope.edit_entry.start_to_s.fromHHMM()
-    $scope.edit_entry.finish = $scope.edit_entry.finish_to_s.fromHHMM() unless $scope.edit_entry.current
+    date = $( "#form_edit_time [datepicker]" ).datepicker( "getDate" )
+    $scope.edit_entry.start = $scope.edit_entry.start_to_s.fromHHMM(date)
+    $scope.edit_entry.finish = $scope.edit_entry.finish_to_s.fromHHMM(date) unless $scope.edit_entry.current
     $('#form_edit_time').css('display','none')
     $scope.saveEntry($scope.edit_entry)
 
   #  MANUALLY ADD ENTRY ###############################################################################
-  $scope.manually_entry = {title: '', start_to_s: new Date().toHHMM(), finish_to_s: new Date().toHHMM()}
+  $scope.manually_entry = {title: '', start_to_s: new Date().toHHMM(), finish_to_s: new Date().toHHMM(), manually: true}
   $scope.saveManuallyEntry = ->
-    $scope.manually_entry.start = $scope.manually_entry.start_to_s.fromHHMM()
-    $scope.manually_entry.finish = $scope.manually_entry.finish_to_s.fromHHMM()
+    date = $( ".manually-form [datepicker]" ).datepicker( "getDate" )
+    $scope.manually_entry.start = $scope.manually_entry.start_to_s.fromHHMM(date)
+    $scope.manually_entry.finish = $scope.manually_entry.finish_to_s.fromHHMM(date)
     $scope.saveEntry($scope.manually_entry)
+
+  onTimeBlur = ''
+  $scope.blur_time = ->
+    onTimeBlur = $timeout(
+      -> $scope.manually_entry.focus_time = false
+    , 100)
+  $scope.focus_time = ->
+    $scope.manually_entry.focus_time = true
+    $timeout.cancel(onTimeBlur)
 
 #  TABLE ENTRIES ###############################################################################
   $scope.checked = -> (entry for entry in $scope.entries when entry.checked)

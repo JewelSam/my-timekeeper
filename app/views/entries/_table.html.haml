@@ -1,6 +1,6 @@
 %article.component-element.margin-top-20.list_of_entries
   .row{'ng-repeat' => 'g_entries in group_entries '}
-    .col-md-12
+    .col-md-12{"ng-if"=>"g_entries.data"}
       %table.table.table-hover
         %thead
           %tr

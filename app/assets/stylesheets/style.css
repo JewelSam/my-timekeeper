@@ -66,8 +66,6 @@ button.btn-danger.my-colors {
 #form_edit_time {
     padding: 20px;
     width: 300px;
-    /*right: 0;*/
-    /*left: auto;*/
 }
 
 #form_edit_time [datepicker] {
@@ -89,6 +87,14 @@ button.btn-danger.my-colors {
 
 .popular_things a:first-child {
     padding-left: 0;
+}
+
+/* manually add */
+.manually-form [datepicker] {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    z-index: 1000;
 }
 
 /* list of entries */
