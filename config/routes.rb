@@ -4,6 +4,8 @@ MyTimekeeper::Application.routes.draw do
   post 'entries/destroy'
 
   get '/pages/:id-:alias' => 'pages#show', as: 'page'
+  get 'pages/successful_register'
+  get 'pages/successful_sign_in'
   root 'pages#home'
 
   get '/500' => 'errors#server_error'
@@ -11,7 +13,9 @@ MyTimekeeper::Application.routes.draw do
   get '/404' => 'errors#not_found'
 
   mount Ckeditor::Engine => '/ckeditor'
-  devise_for :users
+
+  devise_for :users, controllers: { registrations: 'registrations' }
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
