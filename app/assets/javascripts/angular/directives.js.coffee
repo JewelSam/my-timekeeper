@@ -12,3 +12,7 @@ App.directive('showFormEditTime', -> (scope, element, attrs) ->
 App.directive('showDatepicker', -> (scope, element, attrs) ->
   $(element).on('focus', -> $('.manually-form [datepicker]').show() )
 )
+
+App.directive('focusFirstInput',  -> (scope, element, attrs) ->
+  $(element).click -> $(this).find('input:eq(0)').focus()
+)

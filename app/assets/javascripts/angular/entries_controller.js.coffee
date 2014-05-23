@@ -174,7 +174,8 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
       $scope.update_entries()
     ).error((data) -> show_error(data['errors']))
 
-  $scope.showEditForm = (entry) -> entry.edited = true
+  $scope.showEditForm = (entry) ->
+    entry.edited = true
 
   $scope.saveEditedEntry = (entry) ->
     entry.edited = false
