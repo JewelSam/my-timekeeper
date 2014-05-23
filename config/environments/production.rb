@@ -1,6 +1,15 @@
 MyTimekeeper::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => 'baci.lindsaar.net',
+      :user_name            => 'plan.menu.contact@gmail.com',
+      :password             => 'zxc45sfh',
+      :authentication       => 'plain',
+      :enable_starttls_auto => true  }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -77,4 +86,6 @@ MyTimekeeper::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.action_mailer.default_url_options = { :host => 'my-timekeeper.ru' }
 end

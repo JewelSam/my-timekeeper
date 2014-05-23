@@ -23,6 +23,8 @@ ru:
       invalid_token: "Неверный ключ аутентификации."
       timeout: "Ваш сеанс закончился. Пожалуйста, войдите в систему снова."
       inactive: "Ваша учётная запись ещё не активирована."
+      user:
+        not_found_in_database: 'Неверный логин или пароль.'
     sessions:
       signed_in: "Вход в систему выполнен."
       signed_out: "Выход из системы выполнен."
@@ -55,8 +57,8 @@ ru:
       failure: "Вы не можете войти в систему с учётной записью из %{kind}, т.к. %{reason}."
     mailer:
       confirmation_instructions:
-        subject: "Подтверждение регистрации на Buzuluk.bz"
+        subject: "Подтверждение регистрации на MyTimekeeper"
       reset_password_instructions:
-        subject: "Восстановление пароля на Buzuluk.bz"
+        subject: "Восстановление пароля на MyTimekeeper"
       unlock_instructions:
         subject: "Инструкции по разблокировке учётной записи"

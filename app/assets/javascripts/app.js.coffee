@@ -1,8 +1,7 @@
 $ ->
+  $('html').on('click', 'body', (e) ->
+    if $('.manually-form .input-time').find(e.target).length == 0 then $('.manually-form [datepicker]').hide()
+  )
   $('html').click -> $('#form_edit_time').css('display','none')
 
-  $('#form_edit_time [datepicker]').datepicker('option', 'onSelect', ->
-    console.log 'sdf'
-#    currentDate = $( "#form_edit_time [datepicker]" ).datepicker( "getDate" )
-#    $('#form_edit_time [datepicker]').prev('input').val(currentDate)
-  )
+
