@@ -29,7 +29,8 @@ class EntriesController < ApplicationController
     end
 
     if entry.update_attributes entry_params
-      render json: {entries: current_user.entries.as_json(methods: [:start_to_i, :finish_to_i])}
+      render json: {entry: entry.as_json(methods: [:start_to_i, :finish_to_i])}
+      # render json: {entries: current_user.entries.as_json(methods: [:start_to_i, :finish_to_i])}
     else render :json => { :errors => entry.errors.full_messages }, :status => 422
     end
   end

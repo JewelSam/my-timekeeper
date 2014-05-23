@@ -29,6 +29,19 @@ Date.prototype.toYYYYMMDD = function() {
     return dd.toString() + '/' + mm.toString() + '/' + yyyy.toString();
 };
 
+Date.prototype.toSortDateInt = function() {
+    var dd = this.getDate();
+    var mm = this.getMonth() + 1;
+    var yyyy = this.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    return parseInt(dd.toString() +  mm.toString() +  yyyy.toString());
+};
+
 Date.prototype.toMMDDYYYY = function(){
     var yyyy = this.getFullYear();
     var mm = this.getMonth();
