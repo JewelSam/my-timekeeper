@@ -1,5 +1,5 @@
 %article.component-element.margin-top-20.list_of_entries
-  .row
+  .row{'ng-repeat' => 'g_entries in group_entries '}
     .col-md-12
       %table.table.table-hover
         %thead
@@ -8,11 +8,12 @@
               %input{type: 'checkbox', 'ng-checked' => 'allChecked()', 'ng-click' => 'allCheck()'}
               &nbsp;
               %i.fa.fa-trash-o.button-delete{'ng-click' => 'destroyEntry()'}
-            %th Today
+            %th
+              {{g_entries.title}}
             %th Time
             %th
         %tbody
-          %tr{'ng-repeat' => 'entry in entries', 'ng-class' => '{edited: entry.edited}'}
+          %tr{'ng-repeat' => 'entry in g_entries["data"]', 'ng-class' => '{edited: entry.edited}'}
             %td
               %input{type: 'checkbox', 'ng-model' => 'entry.checked'}
               &nbsp;
@@ -20,7 +21,8 @@
               &nbsp;
               %i.fa.fa-trash-o.button-delete{ 'ng-click' => 'destroyEntry(entry)'}
             %td{'ng-click' => 'showEditForm(entry)'}
-              %span.title {{entry.title}}
+              %span.title
+                {{entry.title}}
               %span.label.label-warning.my-colors.category
                 {{categories[entry.category_id].title}}
               %form.edit_entry{'ng-submit' => 'saveEditedEntry(entry)'}

@@ -16,6 +16,14 @@ Date.prototype.toHHMM = function(){
     return res;
 };
 
+
+Date.prototype.toYYYYMMDD = function(){
+    var dd = this.getDate();
+    var mm = this.getMonth()+1;
+    var yyyy = this.getFullYear();
+    if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} return dd.toString() + '/' + mm.toString() + '/' + yyyy.toString();
+};
+
 Number.prototype.hours_minutes_secs = function(){
     var all_secs = Math.round(this/1000);
 
@@ -26,6 +34,10 @@ Number.prototype.hours_minutes_secs = function(){
 
     return result
 };
+
+
+
+
 
 Number.prototype.toHHMMSS = function() {
 

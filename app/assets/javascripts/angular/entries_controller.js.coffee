@@ -2,6 +2,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.categories = []
   $scope.categories_order = []
   $scope.entries = []
+  $scope.group_entries = {}
   $scope.current_entry = {}
 
   $rootScope.loading = true
@@ -16,11 +17,34 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
   $scope.update_entries = ->
     $scope.current_entry = (entry for entry in $scope.entries when entry.current)[0] || {title: ''}
+    $scope.group_entries = {}
+
+
+    i = 0
+    today = new Date().toYYYYMMDD()
+    yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    yesterday = yesterday.toYYYYMMDD();
+    old_sort_date = today
+    $scope.group_entries[0] = {'title':'Today','data':[]}
+
     for entry in $scope.entries
       entry.start = new Date(entry.start_to_i * 1000)
       entry.finish = if entry.finish_to_i then new Date(entry.finish_to_i * 1000) else null
+      entry.sort_date =  entry.start.toYYYYMMDD()
 
-#  CURRENT ENTRY ###############################################################################
+      if old_sort_date != entry.sort_date
+        i = i + 1
+        title = entry.sort_date
+        if entry.sort_date == yesterday then title = 'Yesterday'
+        $scope.group_entries[i] = {'title':title,'data':[]}
+        old_sort_date = entry.sort_date
+
+      $scope.group_entries[i]['data'].push entry
+
+
+
+  #  CURRENT ENTRY ###############################################################################
   $interval(
     -> if $scope.current_entry.current then $scope.current_entry.finish = new Date()
   , 1000)
