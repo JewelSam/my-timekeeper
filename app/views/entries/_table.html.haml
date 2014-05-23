@@ -5,9 +5,9 @@
         %thead
           %tr
             %th
-              %input{type: 'checkbox', 'ng-checked' => 'allChecked()', 'ng-click' => 'allCheck()'}
+              %input{type: 'checkbox', 'ng-checked' => 'allChecked(g_entries)', 'ng-click' => 'allCheck(g_entries)'}
               &nbsp;
-              %i.fa.fa-trash-o.button-delete{'ng-click' => 'destroyEntry()'}
+              %i.fa.fa-trash-o.button-delete{'ng-click' => 'destroyEntry({},g_entries)'}
             %th
               {{g_entries.title}}
             %th Time
@@ -23,7 +23,7 @@
             %td{'ng-click' => 'showEditForm(entry)'}
               %span.title
                 {{entry.title}}
-              %span.label.label-warning.my-colors.category
+              %span.label.label-warning.my-colors.category{"ng-if"=>'entry.category_id'}
                 {{categories[entry.category_id].title}}
               %form.edit_entry{'ng-submit' => 'saveEditedEntry(entry)'}
                 .input-group
