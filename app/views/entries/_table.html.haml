@@ -24,7 +24,6 @@
               %span.title
                 {{entry.title}}
               %span.label.label-warning.my-colors.category{"ng-if"=>'entry.category_id'}
-                
                 {{categories[entry.category_id].title}}
               %form.edit_entry{'ng-submit' => 'saveEditedEntry(entry)'}
                 .input-group
