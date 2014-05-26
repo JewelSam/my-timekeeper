@@ -37,4 +37,6 @@
               {{entry.start_to_i.toHHMM()}}-{{entry.finish_to_i.toHHMM()}}
 
   .row
-    .col-md-12= link_to 'Show more', '#'
+    .col-md-12
+      %a{:href=>'', "ng-click" => "loadMore()"}
+        Show More

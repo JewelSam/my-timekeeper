@@ -6,16 +6,38 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.entries = []
   $scope.group_entries = {}
   $scope.current_entry = {}
+  $scope.page = 0
 
   $rootScope.loading = true
-  $http({method: 'GET', url: '/entries/index.json'}).success( (data) ->
-    $scope.categories = data['categories']
-    $scope.categories_order = data['categories_order']
-    $scope.entries = data['entries']
+#  $http({method: 'GET', url: '/entries/index.json'}).success( (data) ->
+#    $scope.categories = data['categories']
+#    $scope.categories_order = data['categories_order']
+#    $scope.entries = data['entries']
+#
+#    $scope.update_entries()
+#    $rootScope.loading = false
+#  ).error( -> show_error() )
 
-    $scope.update_entries()
-    $rootScope.loading = false
-  ).error( -> show_error() )
+
+
+  $scope.loadMore = ->
+
+
+    $http({method: 'POST', data:{page:$scope.page}, url: '/entries/index.json'}).success( (data) ->
+      $scope.categories = data['categories']
+      $scope.categories_order = data['categories_order']
+      for new_entry in  data['entries']
+        push_flag = true
+        for old_entry in  $scope.entries
+          if new_entry.id == old_entry.id
+            push_flag = false
+        $scope.sort_push_entry new_entry if push_flag
+      $scope.update_entries()
+      $rootScope.loading = false
+      $scope.page = $scope.page + 1
+    ).error( -> show_error() )
+  $scope.loadMore()
+
 
   $scope.sort_push_entry = (main_entry) ->
     flag = true
@@ -158,7 +180,6 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
 
       $scope.createNewEntry()
-  
       $scope.current_entry.title = entry.title
       $scope.current_entry.category_id = entry.category_id
       $scope.createEntry()

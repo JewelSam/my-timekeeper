@@ -1,5 +1,6 @@
 MyTimekeeper::Application.routes.draw do
   get "entries/index"
+  post "entries/index"
   post 'entries/update'
   post 'entries/destroy'
 
