@@ -1,4 +1,6 @@
 App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce', '$interval', '$timeout', ($scope, $route, $http, $rootScope, $sce, $interval, $timeout) ->
+  $rootScope.page = 0
+
   $scope.categories = []
   $scope.categories_order = []
   $scope.entries = []
@@ -29,21 +31,14 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
     $scope.entries.push(main_entry) if flag
 
-
-
-
   $scope.format_entry = (entry) ->
     entry.start = new Date(entry.start_to_i * 1000)
     entry.finish = if entry.finish_to_i then new Date(entry.finish_to_i * 1000) else null
     entry.sort_date =  entry.start.toSortDateInt()
 
-
-
-
   $scope.update_entries = ->
-    $scope.current_entry = (entry for entry in $scope.entries when entry.current)[0] || {title: ''}
+    $scope.current_entry = (entry for entry in $scope.entries when entry.current)[0] || {title: '', is_new:true}
     $scope.group_entries = {}
-
 
     i = 0
     today = new Date().toSortDateInt()
@@ -91,6 +86,8 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
   $scope.createNewEntry = ->
     $scope.current_entry = {title:'', is_new:true}
+
+  $scope.submitNewEntryForm = -> if $scope.current_entry.is_new then $scope.createEntry() else $scope.stopEntry()
 
   $scope.createEntry = ->
     $scope.current_entry.start = new Date()

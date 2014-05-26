@@ -13,8 +13,8 @@
         My
         %span Timekeeper
       %ul.nav.navbar-nav
-        %li.active= link_to 'Timer', '/'
-        %li= link_to 'Reports', '#'
+        %li{'ng-class' => '{active: page == 0}'}= link_to 'Timer', '/'
+        %li{'ng-class' => '{active: page == 1}'}= link_to 'Reports', '/#/reports'
       %ul.nav.navbar-nav.navbar-right
         %li
           = link_to '#' do

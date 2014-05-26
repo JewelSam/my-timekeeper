@@ -25,9 +25,11 @@
 //= require lib/jquery-ui-1.10.4.custom.min
 //= require lib/jquery.form.min
 //= require lib/jquery.validate.min
+//= require lib/jquery.jqplot.min
 //= require lib/bootstrap-switch
 //= require lib/to_time
 //= require angular/routes
 //= require angular/directives
 //= require angular/entries_controller
+//= require angular/reports_controller
 //= require app
