@@ -204,11 +204,11 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     $scope.saveEntry(entry)
     entry.edited = false
 
-  onFormBlur = ''
+
   $scope.onBlurInputEditedForm = (entry) ->
-    onFormBlur = $timeout(
+    entry.onFormBlur = $timeout(
       -> $scope.saveEditedEntry(entry)
     , 100)
-  $scope.onFocusInputEditedForm = -> $timeout.cancel(onFormBlur)
+  $scope.onFocusInputEditedForm =  (entry) -> $timeout.cancel(entry.onFormBlur)
 
 ])

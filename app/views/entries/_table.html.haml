@@ -1,6 +1,6 @@
 %article.component-element.margin-top-20.list_of_entries
   .row{'ng-repeat' => 'g_entries in group_entries '}
-    .col-md-12{"ng-if"=>"g_entries.data"}
+    .col-lg-12{"ng-if"=>"g_entries.data"}
       %table.table.table-hover
         %thead
           %tr
@@ -27,7 +27,7 @@
                 {{categories[entry.category_id].title}}
               %form.edit_entry{'ng-submit' => 'saveEditedEntry(entry)'}
                 .input-group
-                  %input.form-control{type: "text", 'ng-model' => 'entry.title',"focus-me"=> "true" ,'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
+                  %input.form-control{type: "text", 'ng-model' => 'entry.title' ,'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
                   %span.input-group-btn
                     %select.btn.btn-default{'ng-model' => 'entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order", 'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
                       %option{value: ''} Category...
@@ -37,6 +37,6 @@
               {{entry.start_to_i.toHHMM()}}-{{entry.finish_to_i.toHHMM()}}
 
   .row
-    .col-md-12
-      %a{:href=>'', "ng-click" => "loadMore()"}
+    .col-lg-12
+      %button.btn.btn-default.btn-block{:href=>'', "ng-click" => "loadMore()"}
         Show More
