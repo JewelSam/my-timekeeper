@@ -17,7 +17,7 @@
             %td
               %input{type: 'checkbox', 'ng-model' => 'entry.checked'}
               &nbsp;
-              %i.fa.fa-play.button-play{ 'ng-click' => 'setCurrentEntry(entry)'}
+              %i.fa.fa-play{ 'ng-click' => 'setCurrentEntry(entry)', "ng-class"=>"{'button-play': current_entry != entry,'button-play-disable': current_entry == entry  }"}
               &nbsp;
               %i.fa.fa-trash-o.button-delete{ 'ng-click' => 'destroyEntry(entry)'}
             %td{'ng-click' => 'showEditForm(entry)', 'focus-first-input'=>true}

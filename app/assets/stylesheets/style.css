@@ -125,6 +125,10 @@ table input[type="checkbox"]{
     top:2px;
 }
 
+i.button-play-disable{
+    color: #797574;
+    cursor: pointer;
+}
 i.button-play{
     color: #097900;
     cursor: pointer;
