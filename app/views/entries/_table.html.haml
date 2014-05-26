@@ -26,7 +26,7 @@
               %span.label.label-warning.my-colors.category{"ng-if"=>'entry.category_id'}
                 {{categories[entry.category_id].title}}
               %form.edit_entry{'ng-submit' => 'saveEditedEntry(entry)'}
-                .input-group
+                .input-group.input-group-mf
                   %input.form-control{type: "text", 'ng-model' => 'entry.title' ,'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
                   %span.input-group-btn
                     %select.btn.btn-default{'ng-model' => 'entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order", 'ng-blur' => 'onBlurInputEditedForm(entry)', 'ng-focus' => 'onFocusInputEditedForm(entry)'}
