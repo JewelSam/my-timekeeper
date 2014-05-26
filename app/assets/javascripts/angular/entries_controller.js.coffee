@@ -78,7 +78,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     if entry.current
       data.finish = null
     else
-      data.finish = new Date() unless is_edit_time
+      data.finish = new Date() if !is_edit_time && !entry.edited
 
     $http({method: 'POST', url: "/entries/update", data: data}).success((data) ->
       is_new = entry.is_new
@@ -178,8 +178,9 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     entry.edited = true
 
   $scope.saveEditedEntry = (entry) ->
-    entry.edited = false
+
     $scope.saveEntry(entry)
+    entry.edited = false
 
   onFormBlur = ''
   $scope.onBlurInputEditedForm = (entry) ->
