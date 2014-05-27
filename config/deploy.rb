@@ -1,12 +1,12 @@
 
-name = "my_timekeeper"
+name = "application_name"
 
-domain_name = 'my_timekeeper.wlasowy.ru'
+domain_name = 'site-domain.ru'
 
 
 set :application, name
 
-set :repository, "~/rails_projects/" + name
+set :repository, "~/poligon/" + name
 
 
 set :deploy_to, "/home/buzulukbz_deploy/sites/" + name
@@ -111,8 +111,6 @@ namespace :deploy do
 
   desc "Make symlink for database yaml"
   task :finalize_update do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-
     run "rm -r #{release_path}/public/ckeditor_assets"
     run "ln -nfs #{shared_path}/public/ckeditor_assets #{release_path}/public/ckeditor_assets"
 
