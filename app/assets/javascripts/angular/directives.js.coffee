@@ -1,8 +1,5 @@
 App.directive('tabletStyle', -> (scope, element, attrs) -> $(element).bootstrapSwitch())
 App.directive('datepicker', -> (scope, element, attrs) -> $(element).datepicker())
-App.directive('chartdiv', -> (scope, element, attrs) ->
-  $.jqplot(attrs.id,  [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]])
-)
 
 App.directive('showFormEditTime', -> (scope, element, attrs) ->
   $(element).on('click', (e) ->

@@ -15,15 +15,18 @@ class PagesController < ApplicationController
   end
 
   def reports
-    categories = current_user.categories
-    entries = current_user.entries.as_json(methods: [:start_to_i, :finish_to_i])
+    #datachart = [['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], ['Out of home', 16],['Commuting', 7], ['Orientation', 9]]
+    datachart = current_user.categories.map {|cat| [cat.title, cat.entries.sum {|entry| entry.duration}]}
+
+    no_category = Entry.no_category
+    if no_category.count > 0
+      datachart.push(['Без категории', no_category.sum {|entry| entry.duration}])
+    end
 
     respond_to do |format|
       format.html { render layout: false }
       format.json {render json: {
-          categories: to_hash(categories),
-          categories_order: categories,
-          entries: entries
+          datachart: datachart
       }}
     end
   end
