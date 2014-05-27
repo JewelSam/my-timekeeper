@@ -24,7 +24,7 @@ module ApplicationHelper
 
   def breadcrumbs
     res = @page ? children_breadcrumbs([], @page, true) : []
-    res << {title: 'Главная', link: '/'}
+    res << {title: 'Home', link: '/'}
     res.reverse
   end
 

@@ -1,12 +1,12 @@
 
-name = "application_name"
+name = "my_timekeeper"
 
-domain_name = 'site-domain.ru'
+domain_name = 'my_timekeeper.wlasowy.ru'
 
 
 set :application, name
 
-set :repository, "~/poligon/" + name
+set :repository, "~/rails_projects/" + name
 
 
 set :deploy_to, "/home/buzulukbz_deploy/sites/" + name
@@ -36,11 +36,11 @@ namespace :deploy do
 
   desc "Upload file"
   task :upload_file do
-    run "mkdir  -p #{shared_path}/public/ckeditor_assets"
-    run "mkdir  -p #{shared_path}/system/dragonfly"
-    top.upload("public/ckeditor_assets", "#{shared_path}/public/", :via=> :scp, :recursive => true)
+    #run "mkdir  -p #{shared_path}/public/ckeditor_assets"
+    #run "mkdir  -p #{shared_path}/system/dragonfly"
+    #top.upload("public/ckeditor_assets", "#{shared_path}/public/", :via=> :scp, :recursive => true)
 
-    top.upload("public/system/dragonfly/development", "#{shared_path}/system/dragonfly/production", :via=> :scp, :recursive => true)
+    #top.upload("public/system/dragonfly/development", "#{shared_path}/system/dragonfly/production", :via=> :scp, :recursive => true)
 
   end
 
@@ -54,13 +54,13 @@ namespace :deploy do
     #run "rm -rf  #{shared_path}/public"
     run "mkdir -p #{shared_path}/db"
 
-    run "mkdir  -p #{shared_path}/public/ckeditor_assets"
-    run "mkdir  -p #{shared_path}/system/dragonfly"
+    #run "mkdir  -p #{shared_path}/public/ckeditor_assets"
+    #run "mkdir  -p #{shared_path}/system/dragonfly"
 
 
 
 
-    top.upload("db/development.sqlite3", "#{shared_path}/db/production.sqlite3")
+    #top.upload("db/development.sqlite3", "#{shared_path}/db/production.sqlite3")
 
     %x(cap deploy:upload_file)
 
@@ -111,12 +111,13 @@ namespace :deploy do
 
   desc "Make symlink for database yaml"
   task :finalize_update do
-    run "rm -r #{release_path}/public/ckeditor_assets"
-    run "ln -nfs #{shared_path}/public/ckeditor_assets #{release_path}/public/ckeditor_assets"
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    #run "rm -r #{release_path}/public/ckeditor_assets"
+    #run "ln -nfs #{shared_path}/public/ckeditor_assets #{release_path}/public/ckeditor_assets"
 
-    run "mkdir -p #{release_path}/public/system/dragonfly/"
-    run "ln -nfs #{shared_path}/system/dragonfly/production #{release_path}/public/system/dragonfly/production"
-    run "ln -nfs #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
+    #run "mkdir -p #{release_path}/public/system/dragonfly/"
+    #run "ln -nfs #{shared_path}/system/dragonfly/production #{release_path}/public/system/dragonfly/production"
+    #run "ln -nfs #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
   end
 
 

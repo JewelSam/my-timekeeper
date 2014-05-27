@@ -15,11 +15,11 @@ class PagesController < ApplicationController
   end
 
   def successful_register
-    redirect_to '/', :flash => { :notice => "Добро пожаловать! Вы успешно зарегистрировались. Вам на e-mail выслано письмо с ссылкой для подтверждения регистрации." }
+    redirect_to '/', :flash => { :notice => "Welcome! You have signed up successfully. You will receive an email with instructions for how to confirm your email address in a few minutes." }
   end
 
   def successful_sign_in
-    redirect_to '/', :flash => { :notice => "Вход в систему выполнен." }
+    redirect_to '/', :flash => { :notice => "Signed in successfully." }
   end
 
 end
