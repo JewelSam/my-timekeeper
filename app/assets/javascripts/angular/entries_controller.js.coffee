@@ -151,13 +151,17 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     (finish-start).toHHMMSS()
 
   $scope.setCurrentEntry = (entry) ->
-    if $scope.current_entry.current
-      $scope.current_entry.current = false
-      $scope.saveEntry($scope.current_entry)
+    if $scope.current_entry != entry
+      if $scope.current_entry.current
+        $scope.current_entry.current = false
+        $scope.saveEntry( $scope.current_entry)
 
-    $scope.current_entry.title = entry.title
-    $scope.current_entry.category_id = entry.category_id
-    $scope.createEntry()
+
+      $scope.createNewEntry()
+  
+      $scope.current_entry.title = entry.title
+      $scope.current_entry.category_id = entry.category_id
+      $scope.createEntry()
 
   $scope.destroyEntry = (entry = {}, group) ->
     ids = if entry.id then [entry.id] else $scope.checked(group).map((en) -> en.id)
