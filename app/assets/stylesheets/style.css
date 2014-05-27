@@ -11,8 +11,10 @@
 .margin-bottom-10 { margin-bottom: 10px; }
 
 .no-margin-top { margin-top: 0; }
+.margin-top-5 { margin-top: 5px; }
 .margin-top-10 { margin-top: 10px; }
 .margin-top-20 { margin-top: 20px; }
+.margin-top-40 { margin-top: 40px; }
 
 .margin-left-20 { margin-left: 20px; }
 
@@ -152,4 +154,20 @@ i.button-delete:hover{
 
 .list_of_entries table tr.edited td form {
     display: block;
+}
+
+/* reports */
+.jqplot-color {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+#form_edit_period {
+    padding: 20px;
+}
+
+#form_edit_period [datepicker] {
+    margin: 0 0 20px;
 }

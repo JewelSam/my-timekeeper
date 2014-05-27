@@ -31,6 +31,8 @@
 //= require lib/jqplot/jqplot.highlighter.min
 //= require lib/jqplot/jqplot.cursor.min
 //= require lib/bootstrap-switch
+//= require lib/moment.min
+//= require lib/daterangepicker
 //= require lib/to_time
 //= require angular/routes
 //= require angular/directives

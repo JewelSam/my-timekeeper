@@ -20,5 +20,6 @@
  *= require lib/jquery.jqplot.min
  *= require lib/loading
  *= require lib/bootstrap-switch
+ *= require lib/daterangepicker-bs3
  *= require_self
  */

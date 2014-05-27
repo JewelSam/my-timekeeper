@@ -1,4 +1,7 @@
 MyTimekeeper::Application.routes.draw do
+  get "reports/index"
+  post 'reports/data'
+
   get "entries/index"
   post "entries/index"
   post 'entries/update'
@@ -7,7 +10,6 @@ MyTimekeeper::Application.routes.draw do
   get '/pages/:id-:alias' => 'pages#show', as: 'page'
   get 'pages/successful_register'
   get 'pages/successful_sign_in'
-  get 'pages/reports'
   root 'pages#home'
 
   get '/500' => 'errors#server_error'

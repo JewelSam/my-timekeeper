@@ -6,6 +6,7 @@ class Entry < ActiveRecord::Base
 
   default_scope {order('start DESC')}
   scope :no_category, ->{ where(category_id: nil) }
+  scope :fromto, ->(start, finish) { where('start >= ?', start).where('start <= ?', finish) }
 
   def start_to_i; start.to_i end
   def finish_to_i; finish.to_i end
@@ -14,6 +15,7 @@ class Entry < ActiveRecord::Base
     my_finish = finish || Time.now
     my_finish - start
   end
+
 end
 
 # == Schema Information

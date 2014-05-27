@@ -1,0 +1,24 @@
+.container
+  .row
+    %article.component-element
+      .row
+        .col-md-6
+          .row
+            .col-md-5
+              %h3.no-margin-bottom.no-margin-top Summary report
+            .col-md-7
+              .input-group
+                %span.input-group-addon
+                  %i.fa.fa-calendar
+                %input.form-control{type: "text", daterangepicker: true, start: 'start', finish: 'finish', getdata: 'get_data()'}
+          .row.margin-top-40
+            .col-md-12
+              %table.table.table-hover
+                %tbody
+                  %tr{'ng-repeat' => 'str in datachart'}
+                    %td
+                      %span.jqplot-color{style: "background-color: {{colors[$index]}}"}
+                      {{str[0]}}
+                    %td {{(str[1]*1000).toHHMMSS()}}
+        .col-md-6
+          #chart
