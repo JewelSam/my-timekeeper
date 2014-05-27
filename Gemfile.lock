@@ -1,3 +1,9 @@
+PATH
+  remote: /home/jewel-sam/poligon/gem/bms
+  specs:
+    bms (0.0.1)
+      rails (~> 4.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -212,6 +218,7 @@ PLATFORMS
 DEPENDENCIES
   ancestry
   annotate
+  bms!
   cancan
   capistrano
   ckeditor

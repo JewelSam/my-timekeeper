@@ -44,7 +44,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# gem 'bms', path: '/home/jewel-sam/poligon/gem/bms'
+gem 'bms', path: '/home/jewel-sam/poligon/gem/bms'
 
 gem "haml-rails"
 gem "html2haml"
