@@ -64,10 +64,6 @@ Number.prototype.hours_minutes_secs = function(){
     return result
 };
 
-
-
-
-
 Number.prototype.toHHMMSS = function() {
 
     var hash = this.hours_minutes_secs();

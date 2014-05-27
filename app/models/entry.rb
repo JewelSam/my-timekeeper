@@ -5,9 +5,15 @@ class Entry < ActiveRecord::Base
   #validates :start, presence: true
 
   default_scope {order('start DESC')}
+  scope :no_category, ->{ where(category_id: nil) }
 
   def start_to_i; start.to_i end
   def finish_to_i; finish.to_i end
+
+  def duration
+    my_finish = finish || Time.now
+    my_finish - start
+  end
 end
 
 # == Schema Information
