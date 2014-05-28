@@ -1,0 +1,29 @@
+.container
+  .row
+    %article.component-element
+      .row
+        .col-md-12
+          %h3 Categories
+
+          %form{'ng-submit' => 'saveCategory(new_category)', name: 'newCategory'}
+            .input-group.input-group-lg
+              %input.form-control{type: "text", placeholder: 'Category name...', 'ng-model' => 'new_category.title', required: true}
+              .input-group-btn
+                %button.btn.btn-success{:type => "button", 'ng-click' => 'saveCategory(new_category)', 'ng-disabled' => "newCategory.$invalid"} Create
+
+          .row.margin-top-40
+            .col-md-12
+              %table.table.table-hover
+                %tbody
+                  %tr{'ng-repeat' => 'category in categories'}
+                    %td
+                      %div{'ng-show' => '!category.editing', 'ng-dblclick' => 'showEditForm(category)'} {{category.title}}
+                      %div{'ng-show' => 'category.editing'}
+                        %form{'ng-submit' => 'saveCategory(category)', name: 'editCategory'}
+                          .input-group.input-group-lg
+                            %input.form-control{type: "text", placeholder: 'Category name...', 'ng-model' => 'category.title', required: true}
+                            .input-group-btn
+                              %button.btn.btn-success{:type => "button", 'ng-click' => 'saveCategory(category)', 'ng-disabled' => "editCategory.$invalid"} Save
+                    %td
+                      %span.glyphicon.glyphicon-pencil{'ng-show' => '!category.editing', 'ng-click' => 'showEditForm(category)'}
+                      %span.glyphicon.glyphicon-remove{'ng-click' => 'deleteCategory(category)'}

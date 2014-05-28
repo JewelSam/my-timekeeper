@@ -17,7 +17,7 @@
         %li{'ng-class' => '{active: page == 1}'}= link_to 'Reports', '/#/reports'
       %ul.nav.navbar-nav.navbar-right
         %li
-          = link_to '#' do
+          = link_to '/#/settings' do
             %span.glyphicon.glyphicon-cog
         %li
           = link_to destroy_user_session_path, :method => :delete do

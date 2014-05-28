@@ -7,7 +7,11 @@ MyTimekeeper::Application.routes.draw do
   post 'entries/update'
   post 'entries/destroy'
 
+  post 'categories/update' => 'categories#update'
+  post 'categories/delete' => 'categories#delete'
+
   get '/pages/:id-:alias' => 'pages#show', as: 'page'
+  get 'pages/settings'
   get 'pages/successful_register'
   get 'pages/successful_sign_in'
   root 'pages#home'

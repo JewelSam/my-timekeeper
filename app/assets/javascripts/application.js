@@ -34,8 +34,10 @@
 //= require lib/moment.min
 //= require lib/daterangepicker
 //= require lib/to_time
+//= require lib/remove
 //= require angular/routes
 //= require angular/directives
 //= require angular/entries_controller
 //= require angular/reports_controller
+//= require angular/settings_controller
 //= require app
