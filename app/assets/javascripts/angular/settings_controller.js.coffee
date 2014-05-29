@@ -15,18 +15,29 @@ App.controller('SettingsCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce
   $scope.saveCategory = (category) ->
     is_new = category.is_new
 
+    $rootScope.loading = true
     $http({method: 'POST', url: "/categories/update", data: category}).success( (data) ->
       if is_new then $scope.categories.push(data)
       else
         category.title = data.title
         category.editing = false
       $scope.new_category = {is_new: true}
-    ).error((data) -> show_error(data['errors']))
+      $rootScope.loading = false
+    ).error((data) ->
+      $rootScope.loading = false
+      show_error()
+    )
 
   $scope.deleteCategory = (category) ->
-    $http({method: 'POST', url: "/categories/delete", data: category}).success( (data) ->
-      $scope.categories.remove(category)
-    ).error((data) -> show_error(data['errors']))
+    if confirm("Delete category? This action cannot be reversed.")
+      $rootScope.loading = true
+      $http({method: 'POST', url: "/categories/delete", data: category}).success( (data) ->
+        $scope.categories.remove(category)
+        $rootScope.loading = false
+      ).error((data) ->
+        $rootScope.loading = false
+        show_error()
+      )
 
   $scope.new_category = {is_new: true}
 

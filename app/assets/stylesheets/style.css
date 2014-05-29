@@ -47,6 +47,14 @@ button.btn-danger.my-colors {
 .font-light-gray {color: #CECECE;}
 .font-gray { color: #737373; }
 
+#my-error {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
 /* main page */
 .navbar-mind {
     margin-bottom: 30px;

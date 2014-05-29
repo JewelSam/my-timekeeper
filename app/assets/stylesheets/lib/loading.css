@@ -1,14 +1,10 @@
-#loading_div{
-    display: none;
-    z-index: 100;
+.loading_div {
+    background-image: url("/assets/loading.gif");
+    background-repeat: no-repeat;
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    z-index: 11111;
+    top: 50%;
     left: 50%;
-    margin-left: -500px;
-    position: absolute;
-    width: 1000px;
-    text-align: center;
-}
-
-#loading_div img{
-    padding-top: 200px;
-    padding-bottom: 100px;
 }

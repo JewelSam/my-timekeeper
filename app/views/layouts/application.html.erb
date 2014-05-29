@@ -22,6 +22,10 @@
 </head>
 <body ng-app='my_timekeeper'>
 
+<div class="loading_div" ng-show="loading">
+  <!--http://preloaders.net/ru/popular -->
+</div>
+
 <%= render 'layouts/color_switcher' %>
 
 <div class='boxed animated fadeIn animation-delay-5'>
@@ -34,6 +38,11 @@
 
 <div id="back-top">
   <a href="#navigation"><i class="fa fa-chevron-up"></i></a>
+</div>
+
+<div class="alert alert-danger" id='my-error'>
+  <button type="button" class="close" aria-hidden="true">&times;</button>
+  <strong>Error!</strong> Something went wrong. Refresh the page and try again. If the problem persists, email me.
 </div>
 
     <%#=raw MyConfig.get_config('metrika') %>

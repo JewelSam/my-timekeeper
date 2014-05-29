@@ -13,7 +13,10 @@ App.controller('ReportsCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
       $scope.datachart = data['datachart']
       $scope.update_chart()
       $rootScope.loading = false
-    ).error( -> show_error() )
+    ).error( ->
+      $rootScope.loading = false
+      show_error()
+    )
 
   $scope.update_chart = ->
     $.jqplot('chart', [$scope.datachart],

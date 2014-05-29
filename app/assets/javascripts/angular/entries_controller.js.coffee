@@ -35,7 +35,10 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
       $scope.update_entries()
       $rootScope.loading = false
       $scope.page = $scope.page + 1
-    ).error( -> show_error() )
+    ).error( ->
+      $rootScope.loading = false
+      show_error()
+    )
   $scope.loadMore()
 
 
@@ -97,6 +100,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     else
       data.finish = new Date() if !is_edit_time && !entry.edited
 
+    $rootScope.loading = true
     $http({method: 'POST', url: "/entries/update", data: data}).success((data) ->
       is_new = entry.is_new
       angular.extend(entry, data['entry']);
@@ -104,7 +108,11 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
       $scope.sort_push_entry(entry) if is_new || is_edit_time
 
       $scope.update_entries()
-    ).error((data) -> show_error(data['errors']))
+      $rootScope.loading = false
+    ).error((data) ->
+      $rootScope.loading = false
+      show_error()
+    )
 
   $scope.createNewEntry = ->
     $scope.current_entry = {title:'', is_new:true}
@@ -187,20 +195,25 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.destroyEntry = (entry = {}, group) ->
     ids = if entry.id then [entry.id] else $scope.checked(group).map((en) -> en.id)
 
-    $http({method: 'POST', url: "/entries/destroy", data: {ids: ids}}).success((data) ->
-      i = 0
-      for key,entry of angular.copy($scope.entries)
-        if entry.id in ids
-          $scope.entries.splice(key - i, 1)
-          i = i + 1
-      $scope.update_entries()
-    ).error((data) -> show_error(data['errors']))
+    if ids.length > 0 and confirm("Delete #{ids.length} time #{ids.length == 1 ? 'entry' : 'entries'}? This action cannot be reversed.")
+      $rootScope.loading = true
+      $http({method: 'POST', url: "/entries/destroy", data: {ids: ids}}).success((data) ->
+        i = 0
+        for key,entry of angular.copy($scope.entries)
+          if entry.id in ids
+            $scope.entries.splice(key - i, 1)
+            i = i + 1
+        $scope.update_entries()
+        $rootScope.loading = false
+      ).error((data) ->
+        $rootScope.loading = false
+        show_error()
+      )
 
   $scope.showEditForm = (entry) ->
     entry.edited = true
 
   $scope.saveEditedEntry = (entry) ->
-
     $scope.saveEntry(entry)
     entry.edited = false
 
