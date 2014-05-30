@@ -8,30 +8,15 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.current_entry = {}
   $scope.page = 0
 
-  $rootScope.loading = true
-#  $http({method: 'GET', url: '/entries/index.json'}).success( (data) ->
-#    $scope.categories = data['categories']
-#    $scope.categories_order = data['categories_order']
-#    $scope.entries = data['entries']
-#
-#    $scope.update_entries()
-#    $rootScope.loading = false
-#  ).error( -> show_error() )
-
-
-
   $scope.loadMore = ->
-
-
+    $rootScope.loading = true
     $http({method: 'POST', data:{page:$scope.page}, url: '/entries/index.json'}).success( (data) ->
       $scope.categories = data['categories']
       $scope.categories_order = data['categories_order']
       for new_entry in  data['entries']
         push_flag = true
-        for old_entry in  $scope.entries
-          if new_entry.id == old_entry.id
-            push_flag = false
-        $scope.sort_push_entry new_entry if push_flag
+        push_flag = false for old_entry in  $scope.entries when new_entry.id == old_entry.id
+        $scope.sort_push_entry(new_entry) if push_flag
       $scope.update_entries()
       $rootScope.loading = false
       $scope.page = $scope.page + 1
@@ -41,48 +26,45 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     )
   $scope.loadMore()
 
-
   $scope.sort_push_entry = (main_entry) ->
     flag = true
-    delete_key = false
-    for key,entry of $scope.entries
-      if main_entry == entry
-        delete_key = key
-      if entry.start_to_i < main_entry.start_to_i && flag
+    $scope.format_entry(main_entry)
+
+    $scope.entries.splice(key, 1) for key,entry of $scope.entries when main_entry.id == entry.id
+
+    for key, entry of $scope.entries
+      if entry.start and entry.start.isBefore(main_entry.start) && flag
         $scope.entries.splice(key, 0, main_entry);
         flag = false
-    if delete_key
-      $scope.entries.splice(delete_key, 1);
 
     $scope.entries.push(main_entry) if flag
 
   $scope.format_entry = (entry) ->
-    entry.start = new Date(entry.start_to_i * 1000)
-    entry.finish = if entry.finish_to_i then new Date(entry.finish_to_i * 1000) else null
-    entry.sort_date =  entry.start.toSortDateInt()
+    entry.start = moment(entry.start)
+    entry.finish = if entry.finish then moment(entry.finish) else null
+    entry
 
   $scope.update_entries = ->
     $scope.current_entry = (entry for entry in $scope.entries when entry.current)[0] || {title: '', is_new:true}
     $scope.group_entries = {}
 
     i = 0
-    today = new Date().toSortDateInt()
-    yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    yesterday = yesterday.toSortDateInt();
-    old_sort_date = ''
+    old_date = null
 
 
     for entry in $scope.entries
-      $scope.format_entry entry
+      date_of_entry = moment(entry.start).startOf('day')
 
-      if old_sort_date != entry.sort_date
+      if !old_date or !old_date.isSame(date_of_entry)
         i = i + 1
-        title =  entry.start.toYYYYMMDD()
-        if entry.sort_date == today then title = 'Today'
-        if entry.sort_date == yesterday then title = 'Yesterday'
-        $scope.group_entries[i] = {title:title, sort_date:entry.sort_date ,data:[]}
-        old_sort_date = entry.sort_date
+        title =
+          if date_of_entry.isSame moment().startOf('day') then 'Today'
+          else if date_of_entry.isSame moment().subtract('days', 1).startOf('day')
+            'Yesterday'
+          else entry.start.format('DD/MM/YY')
+
+        $scope.group_entries[i] = {title:title, data:[]}
+        old_date = date_of_entry
 
       $scope.group_entries[i]['data'].push entry
 
@@ -90,37 +72,36 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
   #  CURRENT ENTRY ###############################################################################
   $interval(
-    -> if $scope.current_entry.current then $scope.current_entry.finish = new Date()
+    -> if $scope.current_entry.current then $scope.current_entry.finish = moment()
   , 1000)
 
   $scope.saveEntry = (entry, is_edit_time) ->
     data = angular.copy(entry)
     if entry.current
       data.finish = null
-    else
-      data.finish = new Date() if !is_edit_time && !entry.edited
+    else if !is_edit_time && !entry.edited
+      data.finish = moment()
 
     $rootScope.loading = true
     $http({method: 'POST', url: "/entries/update", data: data}).success((data) ->
       is_new = entry.is_new
       angular.extend(entry, data['entry']);
       entry.is_new = false
-      $scope.sort_push_entry(entry) if is_new || is_edit_time
+      if is_new || is_edit_time then $scope.sort_push_entry(entry) else $scope.format_entry(entry)
 
       $scope.update_entries()
       $rootScope.loading = false
-    ).error((data) ->
+    ).error( ->
       $rootScope.loading = false
       show_error()
     )
 
-  $scope.createNewEntry = ->
-    $scope.current_entry = {title:'', is_new:true}
+  $scope.createNewEntry = -> $scope.current_entry = {title: '', is_new: true}
 
   $scope.submitNewEntryForm = -> if $scope.current_entry.is_new then $scope.createEntry() else $scope.stopEntry()
 
   $scope.createEntry = ->
-    $scope.current_entry.start = new Date()
+    $scope.current_entry.start = moment()
     $scope.current_entry.is_new = true
     $scope.current_entry.current = 1
     $scope.saveEntry($scope.current_entry)
@@ -135,24 +116,24 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.edit_entry = {}
   $scope.showFormEditTime = (entry) ->
     $scope.edit_entry = entry
-    $scope.edit_entry.start_to_s = if entry.start then entry.start.toHHMM() else ''
-    $( "#form_edit_time [datepicker]" ).datepicker( "setDate", entry.start || new Date() );
+    $scope.edit_entry.start_to_s = if entry.start then entry.start.format('HH:mm') else ''
+    $( "#form_edit_time [datepicker]" ).datepicker( "setDate", entry.start.format('L') || moment().format('L') );
     unless entry.current
-      $scope.edit_entry.finish_to_s = if entry.finish then entry.finish.toHHMM() else ''
+      $scope.edit_entry.finish_to_s = if entry.finish then entry.finish.format('HH:mm') else ''
 
   $scope.saveEditedTime =  ->
-    date = $( "#form_edit_time [datepicker]" ).datepicker( "getDate" )
-    $scope.edit_entry.start = $scope.edit_entry.start_to_s.fromHHMM(date)
-    $scope.edit_entry.finish = $scope.edit_entry.finish_to_s.fromHHMM(date) unless $scope.edit_entry.current
+    date = moment($( "#form_edit_time [datepicker]" ).datepicker( "getDate" )).format('L')
+    $scope.edit_entry.start = moment("#{date} #{$scope.edit_entry.start_to_s}")
+    $scope.edit_entry.finish = moment("#{date} #{$scope.edit_entry.finish_to_s}") unless $scope.edit_entry.current
     $('#form_edit_time').css('display','none')
     $scope.saveEntry($scope.edit_entry, true)
 
   #  MANUALLY ADD ENTRY ###############################################################################
-  $scope.manually_entry = {title: '', start_to_s: new Date().toHHMM(), finish_to_s: new Date().toHHMM(), manually: true}
+  $scope.manually_entry = {title: '', start_to_s: moment().format('HH:mm'), finish_to_s: moment().format('HH:mm'), manually: true}
   $scope.saveManuallyEntry = ->
-    date = $( ".manually-form [datepicker]" ).datepicker( "getDate" )
-    $scope.manually_entry.start = $scope.manually_entry.start_to_s.fromHHMM(date)
-    $scope.manually_entry.finish = $scope.manually_entry.finish_to_s.fromHHMM(date)
+    date = moment($( ".manually-form [datepicker]" ).datepicker( "getDate" )).format('L')
+    $scope.manually_entry.start = moment("#{date} #{$scope.manually_entry.start_to_s}")
+    $scope.manually_entry.finish = moment("#{date} #{$scope.manually_entry.finish_to_s}")
     $scope.saveEntry($scope.manually_entry,true)
 
   onTimeBlur = ''
@@ -175,10 +156,10 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     entry.checked = !state for entry in group.data
 
   $scope.duration = (entry) ->
-    finish = entry.finish || (if entry.current then new Date() else 0)
-    start = entry.start || 0
-
-    (finish-start).toHHMMSS()
+    if entry.start
+      finish = entry.finish || moment()
+      toHHMMSS(moment.duration(finish.diff(entry.start)))
+    else '0 sec'
 
   $scope.setCurrentEntry = (entry) ->
     if $scope.current_entry != entry
@@ -205,22 +186,20 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
             i = i + 1
         $scope.update_entries()
         $rootScope.loading = false
-      ).error((data) ->
+      ).error( ->
         $rootScope.loading = false
         show_error()
       )
 
-  $scope.showEditForm = (entry) ->
-    entry.edited = true
+  $scope.showEditForm = (entry) ->  entry.edited = true
 
   $scope.saveEditedEntry = (entry) ->
     $scope.saveEntry(entry)
     entry.edited = false
 
-
   $scope.onBlurInputEditedForm = (entry) ->
     entry.onFormBlur = $timeout(
-      -> $scope.saveEditedEntry(entry)
+      -> $scope.saveEditedEntry(entry) if entry.edited
     , 100)
   $scope.onFocusInputEditedForm =  (entry) -> $timeout.cancel(entry.onFormBlur)
 

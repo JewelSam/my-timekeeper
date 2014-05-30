@@ -34,7 +34,7 @@
             %td{'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true,:style=>'width:125px'}
               {{duration(entry)}}
             %td.font-gray{ 'ng-click' => 'showFormEditTime(entry)', 'show-form-edit-time' => true,:style=>'width:75px'}
-              {{entry.start_to_i.toHHMM()}}-{{entry.finish_to_i.toHHMM()}}
+              {{entry.start.format('HH:mm')}}-{{entry.current ? '' : entry.finish.format('HH:mm')}}
 
   .row
     .col-lg-12

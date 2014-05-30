@@ -4,7 +4,7 @@ class EntriesController < ApplicationController
     page = params[:page] || 0
 
     categories = current_user.categories
-    entries = current_user.entries.offset(page * limit).limit(limit).as_json(methods: [:start_to_i, :finish_to_i])
+    entries = current_user.entries.offset(page * limit).limit(limit).as_json()
 
     respond_to do |format|
       format.html { render layout: false }
@@ -31,7 +31,7 @@ class EntriesController < ApplicationController
     end
 
     if entry.update_attributes entry_params
-      render json: {entry: entry.as_json(methods: [:start_to_i, :finish_to_i])}
+      render json: {entry: entry}
     else render :json => { :errors => entry.errors.full_messages }, :status => 422
     end
   end
@@ -51,7 +51,7 @@ class EntriesController < ApplicationController
     end
 
     if result
-      render json: {entries: current_user.entries.as_json(methods: [:start_to_i, :finish_to_i])}
+      render nothing: true
     else render :json => { :errors => errors.uniq.join(' ') }, :status => 422
     end
   end
