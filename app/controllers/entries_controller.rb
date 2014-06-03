@@ -17,6 +17,11 @@ class EntriesController < ApplicationController
 
   end
 
+  def autocomplete_data
+    autocompleteData = current_user.entries.where('start > ?', 2.month.ago).select("DISTINCT title, category_id").all
+    render json: { autocompleteData: autocompleteData }
+  end
+
   def update
     entry = if params[:id]
               entry = Entry.find(params[:id])

@@ -21,5 +21,6 @@
  *= require lib/loading
  *= require lib/bootstrap-switch
  *= require lib/daterangepicker-bs3
+ *= require lib/typeahead
  *= require_self
  */

@@ -33,6 +33,8 @@
 //= require lib/bootstrap-switch
 //= require lib/moment.min
 //= require lib/daterangepicker
+//= require lib/typeahead.bundle.min
+//= require lib/underscore-min
 //= require lib/to_time
 //= require lib/remove
 //= require angular/routes

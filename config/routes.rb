@@ -4,6 +4,7 @@ MyTimekeeper::Application.routes.draw do
 
   get "entries/index"
   post "entries/index"
+  get "entries/autocomplete_data"
   post 'entries/update'
   post 'entries/destroy'
 

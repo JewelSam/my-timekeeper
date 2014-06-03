@@ -54,5 +54,5 @@ App.directive('showDatepicker', -> (scope, element, attrs) ->
 )
 
 App.directive('focusFirstInput',  -> (scope, element, attrs) ->
-  $(element).click -> $(this).find('input:eq(0)').focus()
+  $(element).click -> $(this).find('input:eq(1)').focus()
 )
