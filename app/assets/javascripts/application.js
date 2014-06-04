@@ -25,11 +25,7 @@
 //= require lib/jquery-ui-1.10.4.custom.min
 //= require lib/jquery.form.min
 //= require lib/jquery.validate.min
-//= require lib/jqplot/jquery.jqplot.min
-//= require lib/jqplot/jqplot.pieRenderer.min
-//= require lib/jqplot/jqplot.donutRenderer.min
-//= require lib/jqplot/jqplot.highlighter.min
-//= require lib/jqplot/jqplot.cursor.min
+//= require lib/highcharts
 //= require lib/bootstrap-switch
 //= require lib/moment.min
 //= require lib/daterangepicker

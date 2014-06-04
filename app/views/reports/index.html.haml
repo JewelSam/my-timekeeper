@@ -17,8 +17,8 @@
                 %tbody
                   %tr{'ng-repeat' => 'str in datachart'}
                     %td
-                      %span.jqplot-color{style: "background-color: {{colors[$index]}}"}
-                      {{str[0]}}
-                    %td {{(str[1]*1000).toHHMMSS()}}
+                      -#%span.jqplot-color{style: "background-color: {{colors[$index]}}"}
+                      {{str.name}}
+                    %td {{(str.y*1000).toHHMMSS()}}
         .col-md-6
           #chart

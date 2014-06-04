@@ -10,10 +10,10 @@ class ReportsController < ApplicationController
 
     datachart = {}
     current_user.categories.each {|cat| datachart[cat.title] = 0 }
-    datachart['Without category'] = 0
+    datachart['No category'] = 0
 
     entries.each do |entry|
-      category_title = entry.category ? entry.category.title : 'Without category'
+      category_title = entry.category ? entry.category.title : 'No category'
       datachart[category_title] += entry.duration
     end
 

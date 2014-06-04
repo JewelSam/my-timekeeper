@@ -1,7 +1,7 @@
 App.controller('ReportsCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce', '$interval', '$timeout', ($scope, $route, $http, $rootScope, $sce, $interval, $timeout) ->
   $rootScope.page = 1
-  $scope.colors = [ "#f89e01", "#bf0000", "#6c008f", "#097900", "#de8d01", "#a50000",
-                    "#005b00", "#8300ae", "#fff", "#00708c", "#00439e"]
+#  $scope.colors = [ "#f89e01", "#bf0000", "#6c008f", "#097900", "#de8d01", "#a50000",
+#                    "#005b00", "#8300ae", "#fff", "#00708c", "#00439e"]
 
   $scope.datachart = []
   $scope.start = moment().startOf('week')
@@ -19,27 +19,36 @@ App.controller('ReportsCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     )
 
   $scope.update_chart = ->
-    $.jqplot('chart', [$scope.datachart],
-    {
-      seriesColors: $scope.colors
-      highlighter:
-        show: true
-        tooltipContentEditor: (str, seriesIndex, pointIndex, plot) ->
-          title = plot.data[seriesIndex][pointIndex][0]
-          secs = plot.data[seriesIndex][pointIndex][1]
-
-          "#{title}, #{(secs*1000).toHHMMSS()}";
-        formatString:'%s, %d',
-        useAxesFormatters: false
-      seriesDefaults:
-        renderer: jQuery.jqplot.PieRenderer
-        shadow: false
-      grid:
-        background: '#fff'
-        borderWidth: 0
-        shadow: false
-    }
-    )
+    $('#chart').highcharts({
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+      },
+      title: {
+        text: 'Summary report'
+      },
+      tooltip: {
+        formatter: -> "#{this.key}, #{(this.y*1000).toHHMMSS()}"
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            style: {
+              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+            }
+          }
+        }
+      },
+      series: [{
+        type: 'pie',
+        data: $scope.datachart
+      }]
+    });
 
   $scope.get_data()
 
