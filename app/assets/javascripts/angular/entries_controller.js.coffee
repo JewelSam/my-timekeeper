@@ -122,7 +122,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
   $scope.showFormEditTime = (entry) ->
     $scope.edit_entry = entry
     $scope.edit_entry.start_to_s = if entry.start then entry.start.format('HH:mm') else ''
-    $( "#form_edit_time [datepicker]" ).datepicker( "setDate", entry.start.format('L') || moment().format('L') );
+    $( "#form_edit_time [datepicker]" ).datepicker( "setDate", if entry.start then entry.start.format('L') else moment().format('L') );
     unless entry.current
       $scope.edit_entry.finish_to_s = if entry.finish then entry.finish.format('HH:mm') else ''
 
