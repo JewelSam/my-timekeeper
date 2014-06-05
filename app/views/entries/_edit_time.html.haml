@@ -8,7 +8,7 @@
         %input.form-control{type: 'text', placeholder: 'Start', 'ng-model' => 'edit_entry.start_to_s'}
       .col-md-6
         %input.form-control{type: 'text', placeholder: 'Finish', 'ng-model' => 'edit_entry.finish_to_s', 'ng-disabled' => 'edit_entry.current'}
-    .row
+    .row{'ng-show' => '!(edit_entry.current || edit_entry.is_new)'}
       .col-md-12
         %div{'datepicker' => true}
     .row

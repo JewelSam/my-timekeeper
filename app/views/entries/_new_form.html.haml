@@ -1,6 +1,6 @@
 %form{'ng-submit' => 'submitNewEntryForm()', 'ng-class' => '{active: current_entry.current}', name: 'newEntry'}
   .input-group.input-group-lg.current_entry
-    %input.form-control.typeahead#current_input{type: "text", placeholder: 'What are you working on?', 'ng-model' => 'current_entry.title', 'ng-blur' => 'blurCurrentEntry()'}
+    %input.form-control.typeahead#current_input{type: "text", placeholder: 'What are you working on?', 'ng-model' => 'current_entry.title', 'ng-blur' => 'saveCurrentEntry()'}
     %input{type: "submit", style: "position: absolute; left: -9999px"}
     %span.input-group-btn
       %select.btn.btn-default{'ng-model' => 'current_entry.category_id', 'ng-options' => "c.id as c.title for c in categories_order", 'ng-change' => 'saveCurrentEntry()'}

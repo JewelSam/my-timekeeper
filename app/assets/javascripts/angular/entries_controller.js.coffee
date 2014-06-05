@@ -22,6 +22,8 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
       $scope.updateAutocomplete()
       $rootScope.loading = false
       $scope.page = $scope.page + 1
+
+      $scope.update_chart()
     ).error( ->
       $rootScope.loading = false
       show_error()
@@ -89,7 +91,8 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     $rootScope.loading = true
     $http({method: 'POST', url: "/entries/update", data: data}).success((data) ->
       is_new = entry.is_new
-      angular.extend(entry, data['entry']);
+      entry.id = data['entry'].id
+#      angular.extend(entry, data['entry']);
       entry.is_new = false
       if is_new || is_edit_time then $scope.sort_push_entry(entry) else $scope.format_entry(entry)
 
@@ -113,7 +116,6 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
   $scope.stopEntry = ->
     $scope.current_entry.current = false
-    $timeout.cancel(onblurCurrentEntry)
     $scope.saveEntry($scope.current_entry, {callback: $scope.createNewEntry})
 
   $scope.saveCurrentEntry = -> $scope.saveEntry($scope.current_entry) if $scope.current_entry.current
@@ -130,22 +132,25 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     date = moment($( "#form_edit_time [datepicker]" ).datepicker( "getDate" )).format('L')
     $scope.edit_entry.start = moment("#{date} #{$scope.edit_entry.start_to_s}")
     $scope.edit_entry.finish = moment("#{date} #{$scope.edit_entry.finish_to_s}") unless $scope.edit_entry.current
+
+    if $scope.edit_entry.current and moment().isBefore($scope.edit_entry.start) then $scope.edit_entry.start.subtract('days', 1)
+    else if $scope.edit_entry.finish.isBefore($scope.edit_entry.start) then $scope.edit_entry.finish.add('days', 1)
+
     $('#form_edit_time').css('display','none')
     $scope.saveEntry($scope.edit_entry, {is_edit_time: true})
 
-  onblurCurrentEntry = ''
-  $scope.blurCurrentEntry = ->
-    onblurCurrentEntry = $timeout(
-      -> $scope.saveCurrentEntry()
-    , 100)
-
   #  MANUALLY ADD ENTRY ###############################################################################
-  $scope.manually_entry = {title: '', start_to_s: moment().format('HH:mm'), finish_to_s: moment().format('HH:mm'), manually: true}
+  $scope.update_manually_entry = ->
+    $scope.manually_entry = {title: '', start_to_s: moment().format('HH:mm'), finish_to_s: moment().format('HH:mm'), manually: true}
+    $( "#form_edit_time [datepicker]" ).datepicker( "setDate", moment().format('L') );
+  $scope.update_manually_entry()
+
   $scope.saveManuallyEntry = ->
     date = moment($( ".manually-form [datepicker]" ).datepicker( "getDate" )).format('L')
     $scope.manually_entry.start = moment("#{date} #{$scope.manually_entry.start_to_s}")
     $scope.manually_entry.finish = moment("#{date} #{$scope.manually_entry.finish_to_s}")
-    $scope.saveEntry($scope.manually_entry, {is_edit_time: true})
+    if $scope.manually_entry.finish.isBefore($scope.manually_entry.start) then $scope.manually_entry.finish.add('days', 1)
+    $scope.saveEntry($scope.manually_entry, {callback: $scope.update_manually_entry, is_edit_time: true })
 
   onTimeBlur = ''
   $scope.blur_time = ->
@@ -216,6 +221,15 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     , 100)
   $scope.onFocusInputEditedForm =  (entry) -> $timeout.cancel(entry.onFormBlur)
 
+  $scope.allTimeInGroup = (day) ->
+    sum = 0
+
+    for entry in day['data'] when entry.start
+      finish = entry.finish || moment()
+      sum += finish.diff(entry.start)
+
+    toHHMM(moment.duration(sum))
+
 #  Autocomplete #####################################################################
   $scope.updateAutocomplete = ->
     $http({method: 'GET', url: '/entries/autocomplete_data.json'}).success( (data) ->
@@ -272,5 +286,72 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
       $('.edit_entry .typeahead').bind('typeahead:autocompleted', (obj, data, name) -> set_edit_entry(data))
 
     ).error( -> show_error() )
+
+#  report today
+  $scope.update_chart = ->
+    today = moment().startOf('day')
+    today_group = (entry for entry in $scope.entries when moment(entry.start).startOf('day').isSame(today) or (entry.finish and moment(entry.finish).startOf('day').isSame(today)))
+
+    hash = {}
+    for entry in today_group
+      finish =
+        if entry.finish and entry.finish.isBefore(moment().endOf('day')) then entry.finish
+        else if entry.finish then moment().endOf('day')
+        else moment()
+      start =
+        if entry.start.isBefore(moment().startOf('day')) then moment().startOf('day')
+        else entry.start
+
+      hash[entry.category_id] ||= 0
+      hash[entry.category_id] += finish.diff(start)
+
+    data = []
+    unaccounted_time = moment().diff(moment().startOf('day'))
+    for category, value of hash
+      category_title = if $scope.categories[category] then $scope.categories[category].title else 'No category'
+      data.push({name: category_title, data: [value]})
+      unaccounted_time -= value
+
+    data.unshift({name: 'Unaccounted time', data: [unaccounted_time], color: '#d0d0d0'})
+
+    $('#chart').highcharts({
+      colors: ["#a50000", "#00708c", "#097900", "#6c008f", "#de8d01", "#f89e01", "#bf0000",
+               "#005b00", "#de8d01", "#8300ae", "#00439e"]
+      chart:
+        type: 'bar'
+        backgroundColor: '#f7f7f7'
+        margin: 0
+      title: false,
+      xAxis:
+        lineWidth: 0
+        labels:
+          enabled: false
+      yAxis:
+        title: false
+        lineColor: 'transparent'
+        lineWidth: 0
+        gridLineWidth:0
+        maxPadding: 0
+        labels:
+          enabled: false
+      legend:
+        enabled: false
+      tooltip:
+        formatter: -> "<b>#{this.point.series.name}</b> #{toHHMM(moment.duration(this.y))} (#{Math.round(this.point.percentage*10)/10}%)"
+      plotOptions:
+        bar:
+          stacking: 'percent'
+        series:
+          stacking: 'normal'
+          pointWidth: 40
+          dataLabels:
+            enabled: true
+            color: '#FFFFFF'
+            formatter: -> "#{this.point.series.name}"
+            style:
+              fontSize: '14px'
+              fontFamily: 'Lato, sans-serif'
+      series: data
+    });
 
 ])

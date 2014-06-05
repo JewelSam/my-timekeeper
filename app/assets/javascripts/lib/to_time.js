@@ -31,6 +31,19 @@ window.toHHMMSS = function(duration) {
     return res
 };
 
+window.toHHMM = function(duration) {
+    var h = duration.hours();
+    var m = duration.minutes();
+    var s = duration.seconds();
+    var res = '';
+
+    if (h!=0) res+=h+' h ';
+    if (m!=0) res+=m+' min';
+    if (h==0 && m==0 ) res+=s+' sec';
+
+    return res
+};
+
 Number.prototype.toHHMMSS = function() {
 
     var hash = this.hours_minutes_secs();

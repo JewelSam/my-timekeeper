@@ -79,7 +79,11 @@ button.btn-danger.my-colors {
 }
 
 #form_edit_time [datepicker] {
-    margin: 20px 0;
+    margin: 20px 0 0;
+}
+
+#form_edit_time button[type='submit'] {
+    margin-top: 20px;
 }
 
 .caption-row {
@@ -164,6 +168,13 @@ i.button-delete:hover{
     display: block;
 }
 
+.list_of_entries table .super {
+    font-weight: 400;
+    vertical-align: super;
+    font-size: 12px;
+    margin-left: 7px;
+}
+
 /* reports */
 .jqplot-color {
     width: 10px;
@@ -178,4 +189,8 @@ i.button-delete:hover{
 
 #form_edit_period [datepicker] {
     margin: 0 0 20px;
+}
+
+#chart text[text-anchor="end"] {
+    display: none;
 }

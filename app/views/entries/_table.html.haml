@@ -10,6 +10,7 @@
               %i.fa.fa-trash-o.button-delete{'ng-click' => 'destroyEntry({},g_entries)'}
             %th
               {{g_entries.title}}
+              %span.super {{allTimeInGroup(g_entries)}}
             %th{:width=>'125px'} Time
             %th{:width=>'75px'}
         %tbody
