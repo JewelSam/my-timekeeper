@@ -18,12 +18,14 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
         push_flag = true
         push_flag = false for old_entry in  $scope.entries when new_entry.id == old_entry.id
         $scope.sort_push_entry(new_entry) if push_flag
+
+      $scope.create_chart()
       $scope.update_entries()
-      $scope.updateAutocomplete()
+
       $rootScope.loading = false
       $scope.page = $scope.page + 1
 
-      $scope.update_chart()
+      $scope.updateAutocomplete()
     ).error( ->
       $rootScope.loading = false
       show_error()
@@ -48,7 +50,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     entry.finish = if entry.finish then moment(entry.finish) else null
     entry
 
-  $scope.update_entries = ->
+  $scope.update_entries = (options = {}) ->
     $scope.current_entry = (entry for entry in $scope.entries when entry.current)[0] || {title: '', is_new:true}
     $scope.group_entries = {}
 
@@ -72,6 +74,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
       $scope.group_entries[i]['data'].push entry
 
+    $scope.update_chart()
 
 
   #  CURRENT ENTRY ###############################################################################
@@ -223,11 +226,7 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
 
   $scope.allTimeInGroup = (day) ->
     sum = 0
-
-    for entry in day['data'] when entry.start
-      finish = entry.finish || moment()
-      sum += finish.diff(entry.start)
-
+    sum += entry.finish.diff(entry.start) for entry in $scope.allEntriesInDay(day)
     toHHMM(moment.duration(sum))
 
 #  Autocomplete #####################################################################
@@ -288,22 +287,35 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
     ).error( -> show_error() )
 
 #  report today
-  $scope.update_chart = ->
-    today = moment().startOf('day')
-    today_group = (entry for entry in $scope.entries when moment(entry.start).startOf('day').isSame(today) or (entry.finish and moment(entry.finish).startOf('day').isSame(today)))
+  $scope.allEntriesInDay = (day_title) ->
+    day = switch day_title
+            when "Today" then moment()
+            when "Yesterday" then moment().subtract('days', 1)
+            else moment(day_title, "DD/MM/YY")
 
+    startOfDay = moment(day).startOf('day')
+    endOfDay = moment(day).endOf('day')
+
+    day_entries = []
+    for entry in $scope.entries
+      if moment(entry.start).startOf('day').isSame(startOfDay) or (entry.finish and moment(entry.finish).startOf('day').isSame(startOfDay))
+        finish =
+          if entry.finish and entry.finish.isBefore(endOfDay) then entry.finish
+          else if entry.finish then endOfDay
+          else moment()
+        start =
+          if entry.start.isBefore(startOfDay) then startOfDay
+          else entry.start
+
+        day_entries.push({start: start, finish: finish, category_id: entry.category_id})
+
+    day_entries
+
+  $scope.data_chart = ->
     hash = {}
-    for entry in today_group
-      finish =
-        if entry.finish and entry.finish.isBefore(moment().endOf('day')) then entry.finish
-        else if entry.finish then moment().endOf('day')
-        else moment()
-      start =
-        if entry.start.isBefore(moment().startOf('day')) then moment().startOf('day')
-        else entry.start
-
+    for entry in $scope.allEntriesInDay('Today')
       hash[entry.category_id] ||= 0
-      hash[entry.category_id] += finish.diff(start)
+      hash[entry.category_id] += entry.finish.diff(entry.start)
 
     data = []
     unaccounted_time = moment().diff(moment().startOf('day'))
@@ -313,6 +325,11 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
       unaccounted_time -= value
 
     data.unshift({name: 'Unaccounted time', data: [unaccounted_time], color: '#d0d0d0'})
+    data
+
+#  chart = ''
+  $scope.create_chart = ->
+    data = $scope.data_chart()
 
     $('#chart').highcharts({
       colors: ["#a50000", "#00708c", "#097900", "#6c008f", "#de8d01", "#f89e01", "#bf0000",
@@ -353,5 +370,15 @@ App.controller('EntriesCtrl', ['$scope', '$route', '$http', '$rootScope', '$sce'
               fontFamily: 'Lato, sans-serif'
       series: data
     });
+
+  $scope.update_chart = ->
+    chart = $('#chart').highcharts()
+
+    while chart.series.length > 0 then chart.series[0].remove(false)
+
+    for data_for_series, i in $scope.data_chart()
+      chart.addSeries(data_for_series, false)
+
+    chart.redraw()
 
 ])
